@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunu Dahira</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════
+   SUNU DAHIRA — Palette Ramadan (Teal + Or)
+   ══════════════════════════════════════════════════════ */
+:root {
+  --gold:#D4921A; --gold-light:#F0B429; --gold-pale:#FEF3DC;
+  --gold-glow:#F5C842; --gold-deep:#8A5C08;
+  --teal-darkest:#0A1E1E;
+  --teal-dark:#0F2828;
+  --teal-mid:#1A4848;
+  --teal-accent:#1A5060;
+  --teal-bright:#2A6878;
+  --teal-glow:#3A8898;
+  --surface:#FAFAF7; --surface2:#F5F0E8; --surface3:#EDE5D4;
+  --border:rgba(26,80,96,.14); --border2:rgba(26,80,96,.24);
+  --text:#0F2020; --text2:#1E3C3C; --text3:#3A6878; --text4:#6A9AAA;
+  --white:#FFFFFF;
+  --green:#16A34A; --green-bg:rgba(22,163,74,.09);
+  --red:#DC2626; --red-bg:rgba(220,38,38,.09);
+  --blue:#1A5060; --blue-bg:rgba(26,80,96,.09);
+  --purple:#5B4FC4; --purple-bg:rgba(91,79,196,.09);
+  --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:22px;
+  --shadow-xs:0 1px 3px rgba(10,30,30,.07);
+  --shadow-sm:0 2px 8px rgba(10,30,30,.08),0 1px 2px rgba(10,30,30,.04);
+  --shadow-md:0 4px 20px rgba(10,30,30,.10),0 2px 6px rgba(10,30,30,.05);
+  --shadow-gold:0 8px 32px rgba(212,146,26,.22),0 2px 8px rgba(212,146,26,.12);
+  --shadow-teal:0 8px 32px rgba(26,80,96,.18);
+  --sidebar-w:268px;
+  --topbar-h:64px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; }
+body { font-family:'Outfit',sans-serif; background:var(--surface2); color:var(--text); min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+
+/* ══════════════════════════════════════════════════════
+   SPLASH SCREEN
+   ══════════════════════════════════════════════════════ */
+#splash {
+  position:fixed; inset:0; z-index:9999;
+  background:linear-gradient(135deg, #0A1E1E 0%, #1A4848 55%, #1A5060 100%);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:opacity .6s ease, transform .6s ease;
+}
+#splash.hide {
+  opacity:0; transform:scale(1.04); pointer-events:none;
+}
+
+/* Cercles décoratifs splash */
+.splash-ring {
+  position:absolute; border-radius:50%; border:1px solid rgba(212,146,26,.15);
+  animation:splash-pulse 3s ease-in-out infinite;
+}
+.splash-ring:nth-child(1){width:320px;height:320px;animation-delay:0s}
+.splash-ring:nth-child(2){width:480px;height:480px;animation-delay:.5s;border-color:rgba(60,140,140,.1)}
+.splash-ring:nth-child(3){width:640px;height:640px;animation-delay:1s;border-color:rgba(212,146,26,.07)}
+@keyframes splash-pulse {
+  0%,100%{opacity:.3;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.02)}
+}
+
+/* Étoiles décoratives */
+.splash-stars {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden;
+}
+.splash-star {
+  position:absolute; border-radius:50%;
+  background:rgba(245,200,66,.25);
+  animation:twinkle 2.5s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,100%{opacity:.2;transform:scale(1)}
+  50%{opacity:.9;transform:scale(1.3)}
+}
+
+.splash-content {
+  position:relative; z-index:2;
+  display:flex; flex-direction:column; align-items:center;
+  animation:splashFadeIn .8s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes splashFadeIn {
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Logo Coran */
+.splash-logo-wrap {
+  width:100px; height:100px; border-radius:28px;
+  background:linear-gradient(135deg, rgba(212,146,26,.25), rgba(245,200,66,.1));
+  border:1px solid rgba(212,146,26,.4);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:28px; position:relative;
+  box-shadow:0 0 60px rgba(212,146,26,.2), 0 8px 32px rgba(0,0,0,.3);
+  animation:logoGlow 2.5s ease-in-out infinite;
+}
+@keyframes logoGlow {
+  0%,100%{box-shadow:0 0 60px rgba(212,146,26,.2),0 8px 32px rgba(0,0,0,.3)}
+  50%{box-shadow:0 0 80px rgba(212,146,26,.45),0 8px 40px rgba(0,0,0,.4)}
+}
+.splash-logo-inner {
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+}
+/* Livre Coran SVG stylisé */
+.splash-coran-icon { color:var(--gold-glow); }
+
+.splash-app-name {
+  font-size:36px; font-weight:900; color:#fff; letter-spacing:-.03em;
+  line-height:1; margin-bottom:8px; text-align:center;
+}
+.splash-app-name span { color:var(--gold-glow); }
+.splash-tagline {
+  font-size:13px; color:rgba(255,255,255,.4); font-weight:400;
+  letter-spacing:.06em; text-transform:uppercase; text-align:center;
+  margin-bottom:48px;
+}
+
+/* Loader bar */
+.splash-loader {
+  display:flex; gap:8px; align-items:center; flex-direction:column;
+}
+.splash-dots {
+  display:flex; gap:8px; align-items:center;
+}
+.splash-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--gold-glow); opacity:.3;
+  animation:dotPulse 1.2s ease-in-out infinite;
+}
+.splash-dot:nth-child(2){animation-delay:.2s}
+.splash-dot:nth-child(3){animation-delay:.4s}
+@keyframes dotPulse {
+  0%,100%{opacity:.2;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1)}
+}
+
+/* Barre de progression splash */
+.splash-progress-wrap {
+  width:180px; height:3px; background:rgba(255,255,255,.1);
+  border-radius:99px; margin-top:16px; overflow:hidden;
+}
+.splash-progress-bar {
+  height:100%; background:linear-gradient(90deg, var(--gold), var(--gold-glow));
+  border-radius:99px; width:0%;
+  animation:splashLoad 15s linear forwards;
+}
+@keyframes splashLoad {
+  0%{width:0%}
+  100%{width:100%}
+}
+
+.splash-bottom {
+  position:absolute; bottom:40px;
+  font-size:11px; color:rgba(255,255,255,.2); letter-spacing:.08em; text-transform:uppercase;
+}
+
+/* ══════════════════════════════════════════════════════
+   ONBOARDING
+   ══════════════════════════════════════════════════════ */
+#onboarding {
+  position:fixed; inset:0; z-index:9000;
+  background:var(--surface2);
+  display:none; flex-direction:column;
+  overflow:hidden;
+}
+#onboarding.visible { display:flex; }
+
+.ob-slides-wrap {
+  flex:1; display:flex; flex-direction:column;
+  overflow:hidden;
+}
+
+.ob-slides {
+  display:flex; flex:1;
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
+}
+
+.ob-slide {
+  min-width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:40px 36px 0;
+}
+
+/* Illustration slide */
+.ob-illustration {
+  width:220px; height:220px; border-radius:32px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; margin-bottom:40px; flex-shrink:0;
+}
+
+/* Slide 1 — Dahira */
+.ob-ill-1 {
+  background:linear-gradient(135deg,#0A1E1E,#1A4848,#1A5060);
+  box-shadow:0 20px 60px rgba(26,80,96,.35);
+}
+.ob-ill-1::before {
+  content:''; position:absolute; inset:-1px; border-radius:33px;
+  background:linear-gradient(135deg,rgba(212,146,26,.3),transparent,rgba(60,140,140,.2));
+  z-index:0;
+}
+.ob-ill-1-inner { position:relative; z-index:1; text-align:center; }
+
+/* Slide 2 — Communauté */
+.ob-ill-2 {
+  background:linear-gradient(135deg,#F5F0E8,#EDE5D4);
+  border:2px solid var(--border);
+  box-shadow:0 20px 60px rgba(10,30,30,.1);
+}
+
+/* Slide 3 — Finances */
+.ob-ill-3 {
+  background:linear-gradient(135deg,#0F2828,#1A4848);
+  box-shadow:0 20px 60px rgba(26,80,96,.4);
+}
+
+.ob-title {
+  font-size:26px; font-weight:800; color:var(--text);
+  text-align:center; letter-spacing:-.03em; line-height:1.2;
+  margin-bottom:14px;
+}
+.ob-title em { font-style:normal; color:var(--teal-accent); }
+.ob-desc {
+  font-size:15px; color:var(--text4); text-align:center;
+  line-height:1.65; font-weight:400; max-width:300px;
+}
+
+/* Dots navigation */
+.ob-dots {
+  display:flex; justify-content:center; gap:8px;
+  padding:28px 0 20px;
+}
+.ob-dot {
+  width:8px; height:8px; border-radius:99px;
+  background:var(--surface3); transition:all .3s ease;
+}
+.ob-dot.active { width:28px; background:var(--teal-accent); }
+
+/* Boutons onboarding */
+.ob-footer {
+  padding:0 24px 40px; display:flex; flex-direction:column; gap:12px;
+}
+.ob-btn-next {
+  width:100%; padding:17px;
+  background:linear-gradient(135deg,var(--teal-mid),var(--teal-accent));
+  border:none; border-radius:var(--r-lg); color:white;
+  font-size:16px; font-weight:700; cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  box-shadow:0 6px 24px rgba(26,80,96,.4);
+  transition:all .2s; letter-spacing:-.01em;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.ob-btn-next:active { transform:scale(.97); }
+.ob-btn-skip {
+  width:100%; padding:13px;
+  background:none; border:none; color:var(--text4);
+  font-size:14px; font-weight:600; cursor:pointer;
+  font-family:'Outfit',sans-serif; transition:color .15s;
+}
+.ob-btn-skip:hover { color:var(--text3); }
+
+/* Mini card dahira pour slide 1 */
+.ob-mini-card {
+  background:rgba(255,255,255,.08); border-radius:16px;
+  padding:14px 18px; border:1px solid rgba(212,146,26,.2);
+  margin-bottom:12px; text-align:center;
+}
+.ob-mini-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(212,146,26,.2); border:1px solid rgba(212,146,26,.3);
+  color:var(--gold-glow); font-size:10px; font-weight:700;
+  padding:4px 12px; border-radius:20px; margin-bottom:10px;
+}
+.ob-mini-title { font-size:16px; font-weight:800; color:white; line-height:1.2; margin-bottom:4px; }
+.ob-mini-sub { font-size:10px; color:rgba(255,255,255,.4); }
+.ob-mini-stats {
+  display:flex; gap:4px; margin-top:10px;
+}
+.ob-ms {
+  flex:1; background:rgba(0,0,0,.25); border-radius:10px;
+  padding:8px 4px; text-align:center;
+}
+.ob-ms-val { font-size:16px; font-weight:800; color:var(--gold-glow); line-height:1; }
+.ob-ms-lbl { font-size:8px; color:rgba(255,255,255,.3); margin-top:2px; text-transform:uppercase; }
+
+/* Avatars pour slide 2 */
+.ob-avatars {
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:16px;
+}
+.ob-av {
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:800; color:white;
+  box-shadow:0 4px 14px rgba(0,0,0,.15);
+}
+.ob-feature-list {
+  display:flex; flex-direction:column; gap:10px; margin-top:4px; width:100%;
+}
+.ob-feature {
+  display:flex; align-items:center; gap:12px;
+  background:white; border-radius:12px; padding:12px 14px;
+  border:1px solid var(--border); box-shadow:var(--shadow-xs);
+}
+.ob-feature-ico {
+  width:36px; height:36px; border-radius:10px; flex-shrink:0;
+  background:linear-gradient(135deg,rgba(26,80,96,.1),rgba(60,140,140,.05));
+  border:1px solid rgba(26,80,96,.16);
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+}
+.ob-feature-txt { font-size:13px; font-weight:600; color:var(--text); }
+.ob-feature-sub { font-size:11px; color:var(--text4); }
+
+/* Finance bars slide 3 */
+.ob-fin-bars {
+  display:flex; align-items:flex-end; gap:10px; height:100px; padding:0 20px;
+}
+.ob-bar { flex:1; border-radius:8px 8px 0 0; }
+.ob-fin-label { font-size:11px; color:rgba(255,255,255,.4); text-align:center; margin-top:8px; }
+.ob-fin-grid {
+  width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:14px;
+}
+.ob-fin-box {
+  background:rgba(255,255,255,.07); border-radius:14px;
+  padding:14px 12px; border:1px solid rgba(60,140,140,.2); text-align:center;
+}
+.ob-fin-val { font-size:18px; font-weight:800; color:var(--gold-glow); }
+.ob-fin-lbl { font-size:9px; color:rgba(255,255,255,.35); margin-top:3px; text-transform:uppercase; letter-spacing:.06em; }
+
+
+/* ─────────────────────── OVERLAY ─────────────────────── */
+.overlay { display:none; position:fixed; inset:0; background:rgba(10,30,30,.6); z-index:200; backdrop-filter:blur(3px); }
+.overlay.show { display:block; }
+
+/* ─────────────────────── SIDEBAR ─────────────────────── */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:linear-gradient(180deg, #0A2818 0%, #0F3525 50%, #164832 100%);
+  display:flex; flex-direction:column;
+  z-index:300;
+  border-right:1px solid rgba(22,163,74,.15);
+  transform:translateX(-100%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto; overflow-x:hidden;
+}
+.sidebar.open { transform:translateX(0); }
+.sidebar::-webkit-scrollbar { width:4px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(100,220,150,.2); border-radius:2px; }
+
+.sb-logo {
+  padding:24px 20px 20px;
+  border-bottom:1px solid rgba(22,163,74,.12);
+  display:flex; align-items:center; gap:12px; flex-shrink:0;
+}
+.sb-icon {
+  width:40px; height:40px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  border-radius:var(--r-md); display:flex; align-items:center;
+  justify-content:center; font-size:18px; flex-shrink:0;
+  box-shadow:0 4px 14px rgba(212,146,26,.4);
+}
+.sb-brand h1 { font-size:15px; font-weight:800; color:var(--gold-light); line-height:1.1; }
+.sb-brand small { font-size:10px; color:rgba(255,255,255,.3); margin-top:2px; display:block; font-weight:400; }
+.sb-close { margin-left:auto; background:rgba(255,255,255,.06); border:none; color:rgba(255,255,255,.4); font-size:16px; cursor:pointer; padding:6px; border-radius:8px; width:30px; height:30px; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+.sb-close:hover { background:rgba(255,255,255,.1); }
+
+.sb-sec { font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(100,220,150,.35); padding:20px 20px 6px; font-weight:700; }
+
+.nav-item {
+  display:flex; align-items:center; gap:11px;
+  padding:10px 20px; margin:1px 8px; border-radius:var(--r-sm);
+  color:rgba(255,255,255,.45); font-size:13.5px; font-weight:500;
+  cursor:pointer; transition:all .18s; text-decoration:none; border:none;
+}
+.nav-item:hover { color:rgba(255,255,255,.82); background:rgba(100,220,150,.1); }
+.nav-item.active {
+  color:rgba(100,220,150,.95);
+  background:linear-gradient(90deg,rgba(22,163,74,.25),rgba(22,163,74,.05));
+  font-weight:700;
+  box-shadow:inset 3px 0 0 rgba(100,220,150,.7);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  margin-left:0; padding-left:28px;
+}
+.nav-icon { width:20px; text-align:center; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+
+.sb-footer {
+  margin-top:auto; padding:16px 20px;
+  border-top:1px solid rgba(22,163,74,.12); flex-shrink:0;
+}
+.u-card { display:flex; align-items:center; gap:10px; }
+.u-av {
+  width:36px; height:36px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; color:white; font-weight:700; flex-shrink:0;
+  box-shadow:0 2px 8px rgba(212,146,26,.35);
+}
+.u-name { font-size:13px; color:rgba(255,255,255,.88); font-weight:600; line-height:1.2; }
+.u-role { font-size:10.5px; color:var(--gold-light); opacity:.7; margin-top:1px; }
+
+/* ─────────────────────── TOPBAR ─────────────────────── */
+.topbar {
+  position:sticky; top:0; z-index:100;
+  background:rgba(250,250,247,.93);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  padding:0 20px; height:var(--topbar-h);
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow-xs);
+}
+.tb-left { display:flex; align-items:center; gap:14px; }
+.hamburger {
+  width:38px; height:38px; border-radius:var(--r-sm);
+  border:1px solid var(--border2); background:var(--white);
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:4.5px; cursor:pointer; flex-shrink:0;
+  box-shadow:var(--shadow-xs); transition:all .18s;
+}
+.hamburger:active { transform:scale(.95); }
+.hamburger span { display:block; width:14px; height:1.5px; background:var(--teal-accent); border-radius:2px; }
+.tb-brand { font-size:17px; font-weight:800; color:var(--text); letter-spacing:-.02em; }
+.tb-brand small { display:block; font-size:10px; color:var(--text4); font-weight:400; }
+.tb-right { display:flex; align-items:center; gap:8px; }
+.tb-btn {
+  width:38px; height:38px; border-radius:var(--r-sm);
+  border:1px solid var(--border); background:var(--white);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:16px; position:relative;
+  box-shadow:var(--shadow-xs); transition:all .18s;
+}
+.tb-btn:active { transform:scale(.95); }
+.notif-badge {
+  position:absolute; top:-4px; right:-4px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--red); border:2px solid var(--surface);
+  font-size:7.5px; color:white; display:flex; align-items:center; justify-content:center;
+  font-weight:700;
+}
+
+/* ─────────────────────── PAGES ─────────────────────── */
+.page { display:none; padding:20px 16px 100px; }
+.page.active { display:block; }
+
+/* ─────────────────────── HERO ─────────────────────── */
+.hero {
+  background:linear-gradient(135deg, var(--teal-darkest) 0%, var(--teal-mid) 55%, #1A5060 100%);
+  border-radius:var(--r-xl); padding:24px 22px 22px;
+  margin-bottom:20px; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:220px; height:220px; border-radius:50%;
+  border:1px solid rgba(212,146,26,.12);
+  animation:pulse 4s ease-in-out infinite;
+}
+.hero::after {
+  content:''; position:absolute; top:-30px; right:-30px;
+  width:140px; height:140px; border-radius:50%;
+  border:1px solid rgba(60,140,140,.1);
+}
+.hero-shimmer {
+  position:absolute; inset:0; border-radius:var(--r-xl);
+  background:radial-gradient(ellipse at 70% 30%, rgba(60,140,140,.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.9} }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(212,146,26,.18); border:1px solid rgba(212,146,26,.28);
+  color:var(--gold-glow); font-size:10px; font-weight:600;
+  padding:4px 10px; border-radius:20px; margin-bottom:14px; position:relative;
+}
+.hero-top { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+.hero-title { font-size:22px; color:white; font-weight:800; line-height:1.2; letter-spacing:-.02em; }
+.hero-sub { font-size:11.5px; color:rgba(255,255,255,.4); margin-top:6px; font-weight:400; }
+.hero-arabic {
+  font-size:52px; color:rgba(91,181,181,.2);
+  user-select:none; flex-shrink:0; font-weight:900;
+  line-height:1; margin-top:-6px;
+}
+.hero-stats {
+  display:flex; margin-top:22px;
+  background:rgba(0,0,0,.3); border-radius:var(--r-md);
+  overflow:hidden; border:1px solid rgba(60,140,140,.15);
+  position:relative;
+}
+.h-stat { flex:1; padding:14px 10px; text-align:center; border-right:1px solid rgba(255,255,255,.06); }
+.h-stat:last-child { border-right:none; }
+.h-stat .val { font-size:20px; font-weight:800; color:var(--gold-glow); line-height:1; letter-spacing:-.02em; }
+.h-stat .lbl { font-size:9px; color:rgba(255,255,255,.32); margin-top:4px; font-weight:500; text-transform:uppercase; letter-spacing:.06em; }
+
+/* ─────────────────────── STAT CARDS ─────────────────────── */
+.scroll-row { display:flex; gap:12px; overflow-x:auto; padding-bottom:4px; margin-bottom:20px; scrollbar-width:none; }
+.scroll-row::-webkit-scrollbar { display:none; }
+.stat-card {
+  background:var(--white); border-radius:var(--r-lg);
+  padding:18px; min-width:158px; flex-shrink:0;
+  border:1px solid var(--border); box-shadow:var(--shadow-sm);
+  transition:transform .2s, box-shadow .2s;
+  position:relative; overflow:hidden;
+}
+.stat-card::after {
+  content:''; position:absolute; bottom:-16px; right:-16px;
+  width:64px; height:64px; border-radius:50%; opacity:.08;
+}
+.sc-gold::after { background:var(--gold); }
+.sc-green::after { background:var(--green); }
+.sc-blue::after { background:var(--teal-accent); }
+.sc-purple::after { background:var(--purple); }
+.sc-ico {
+  width:38px; height:38px; border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  font-size:17px; margin-bottom:12px;
+  color:inherit;
+}
+.sc-gold .sc-ico { background:linear-gradient(135deg,rgba(212,146,26,.18),rgba(212,146,26,.06)); }
+.sc-green .sc-ico { background:var(--green-bg); }
+.sc-blue .sc-ico { background:rgba(26,80,96,.1); }
+.sc-purple .sc-ico { background:var(--purple-bg); }
+.sc-num { font-size:26px; font-weight:800; color:var(--text); line-height:1; letter-spacing:-.03em; }
+.sc-lbl { font-size:11px; color:var(--text3); margin-top:4px; font-weight:500; }
+.sc-trend { display:inline-flex; align-items:center; gap:3px; font-size:10.5px; font-weight:600; padding:3px 8px; border-radius:20px; margin-top:8px; }
+.t-up { color:var(--green); background:var(--green-bg); }
+.t-dn { color:var(--red); background:var(--red-bg); }
+
+/* ─────────────────────── SECTION TITLE ─────────────────────── */
+.sec-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.sec-title h3 { font-size:16px; font-weight:700; color:var(--text); letter-spacing:-.01em; }
+.sec-title a, .sec-title button.link {
+  font-size:12px; color:var(--teal-accent); font-weight:600;
+  text-decoration:none; background:none; border:none; cursor:pointer;
+  display:flex; align-items:center; gap:3px;
+}
+
+/* ─────────────────────── QUICK ACTIONS ─────────────────────── */
+.qa-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:22px; }
+.qa-btn {
+  background:var(--white); border-radius:var(--r-lg); padding:16px 14px;
+  border:1px solid var(--border); box-shadow:var(--shadow-sm);
+  cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:12px;
+}
+.qa-btn:hover { border-color:rgba(26,80,96,.3); box-shadow:var(--shadow-teal); transform:translateY(-1px); }
+.qa-btn:active { transform:scale(.97); }
+.qa-ico-wrap {
+  width:42px; height:42px; border-radius:var(--r-sm);
+  background:linear-gradient(135deg,rgba(26,80,96,.1),rgba(60,140,140,.05));
+  border:1px solid rgba(26,80,96,.16);
+  display:flex; align-items:center; justify-content:center;
+  font-size:19px; flex-shrink:0;
+  color:var(--teal-accent);
+}
+.qa-label { font-size:12.5px; font-weight:700; color:var(--text); letter-spacing:-.01em; }
+.qa-sub { font-size:10px; color:var(--text4); margin-top:2px; }
+
+/* ─────────────────────── CARD ─────────────────────── */
+.card {
+  background:var(--white); border-radius:var(--r-xl);
+  border:1px solid var(--border); box-shadow:var(--shadow-sm);
+  overflow:hidden; margin-bottom:16px;
+}
+.card-hdr {
+  padding:18px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.card-hdr h4 { font-size:15px; font-weight:700; color:var(--text); letter-spacing:-.01em; }
+.card-hdr a, .card-hdr button.link {
+  font-size:12px; color:var(--teal-accent); font-weight:600;
+  text-decoration:none; background:none; border:none; cursor:pointer;
+}
+
+/* ─────────────────────── MEMBERS ─────────────────────── */
+.m-row {
+  display:flex; align-items:center; gap:13px;
+  padding:14px 20px; border-bottom:1px solid var(--border);
+  cursor:pointer; transition:background .15s;
+}
+.m-row:last-child { border-bottom:none; }
+.m-row:hover { background:var(--surface3); }
+.m-av {
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:700; color:white; flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.14);
+}
+.m-info { flex:1; min-width:0; }
+.m-name { font-size:13.5px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:-.01em; }
+.m-role { font-size:11px; color:var(--text4); margin-top:2px; }
+.m-right { text-align:right; flex-shrink:0; }
+.badge { font-size:10px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap; display:inline-block; }
+.b-ok { background:var(--green-bg); color:var(--green); }
+.b-late { background:var(--red-bg); color:var(--red); }
+.b-sym { background:rgba(212,146,26,.12); color:var(--gold-deep); }
+.m-amount { font-size:12px; font-weight:700; color:var(--text2); margin-top:4px; }
+.m-amount small { font-size:9.5px; color:var(--text4); font-weight:400; }
+
+/* ─────────────────────── EVENTS ─────────────────────── */
+.ev-row {
+  display:flex; align-items:flex-start; gap:14px;
+  padding:16px 20px; border-bottom:1px solid var(--border);
+  cursor:pointer; transition:background .15s;
+}
+.ev-row:last-child { border-bottom:none; }
+.ev-row:hover { background:var(--surface3); }
+.ev-date {
+  min-width:44px; text-align:center;
+  background:linear-gradient(135deg,rgba(26,80,96,.08),rgba(26,80,96,.04));
+  border-radius:var(--r-sm);
+  padding:8px 5px; border:1px solid rgba(26,80,96,.16); flex-shrink:0;
+}
+.ev-day { font-size:20px; font-weight:800; color:var(--teal-accent); line-height:1; }
+.ev-mon { font-size:9px; color:var(--text4); text-transform:uppercase; letter-spacing:.06em; margin-top:1px; font-weight:600; }
+.ev-title { font-size:13.5px; font-weight:600; color:var(--text); letter-spacing:-.01em; }
+.ev-desc { font-size:11px; color:var(--text4); margin-top:3px; }
+.ev-tag { font-size:9.5px; font-weight:700; padding:3px 9px; border-radius:20px; display:inline-flex; margin-top:6px; text-transform:uppercase; letter-spacing:.05em; }
+.t-coran { background:rgba(212,146,26,.12); color:var(--gold-deep); }
+.t-reu { background:rgba(26,80,96,.1); color:var(--teal-accent); }
+.t-soc { background:var(--green-bg); color:var(--green); }
+
+/* ─────────────────────── FINANCE ─────────────────────── */
+.fin-row { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); }
+.fin-box { padding:18px 20px; }
+.fin-box:first-child { border-right:1px solid var(--border); }
+.fb-lbl { font-size:10.5px; color:var(--text4); text-transform:uppercase; letter-spacing:.08em; font-weight:600; }
+.fb-amt { font-size:24px; font-weight:800; margin-top:5px; letter-spacing:-.03em; }
+.fb-rec .fb-amt { color:var(--green); }
+.fb-dep .fb-amt { color:var(--red); }
+.fb-sub { font-size:10px; color:var(--text4); margin-top:3px; }
+.bar-chart { padding:18px 20px; }
+.bc-lbl { font-size:11px; color:var(--text4); margin-bottom:14px; font-weight:500; }
+.bars { display:flex; align-items:flex-end; gap:7px; height:76px; }
+.bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; }
+.bar-fill { width:100%; border-radius:5px 5px 0 0; transition:height .4s ease; }
+.bar-lbl { font-size:9px; color:var(--text4); font-weight:500; }
+
+/* ─────────────────────── PROGRESS ─────────────────────── */
+.prog-item { padding:14px 20px; border-bottom:1px solid var(--border); }
+.prog-item:last-child { border-bottom:none; }
+.prog-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.pname { font-size:13px; font-weight:600; color:var(--text); }
+.pval { font-size:13px; font-weight:800; color:var(--text2); }
+.prog-track { height:6px; background:var(--surface3); border-radius:99px; overflow:hidden; }
+.prog-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--teal-accent),var(--teal-bright)); transition:width .6s ease; }
+.prog-sub { font-size:10.5px; color:var(--text4); margin-top:6px; }
+
+/* ─────────────────────── EMPTY STATE ─────────────────────── */
+.empty { text-align:center; padding:48px 20px; color:var(--text4); }
+.empty .ei { font-size:44px; margin-bottom:14px; display:flex; justify-content:center; color:var(--text4); }
+.empty p { font-size:13px; font-weight:500; }
+
+/* ─────────────────────── MODAL ─────────────────────── */
+.modal-bg { display:none; position:fixed; inset:0; background:rgba(10,30,30,.65); z-index:500; align-items:flex-end; justify-content:center; }
+.modal-bg.show { display:flex; }
+.modal {
+  background:var(--white); border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:26px 22px 36px; width:100%; max-width:560px;
+  max-height:90vh; overflow-y:auto;
+  animation:slideUp .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -8px 40px rgba(10,30,30,.2);
+}
+@keyframes slideUp { from{transform:translateY(100%);opacity:.5} to{transform:translateY(0);opacity:1} }
+.modal-hdr { display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; }
+.modal-hdr h3 { font-size:18px; font-weight:800; color:var(--text); letter-spacing:-.02em; }
+.modal-close {
+  background:var(--surface3); border:none; width:34px; height:34px;
+  border-radius:50%; cursor:pointer; font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--text3); transition:background .15s;
+}
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:11.5px; font-weight:700; color:var(--text3); margin-bottom:7px; text-transform:uppercase; letter-spacing:.06em; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:12px 15px;
+  border:1.5px solid var(--surface3);
+  border-radius:var(--r-md);
+  font-size:14px; font-family:'Outfit',sans-serif;
+  background:var(--surface);
+  color:var(--text); outline:none;
+  transition:border-color .18s, box-shadow .18s;
+  font-weight:500;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color:var(--teal-accent); box-shadow:0 0 0 3px rgba(26,80,96,.1);
+}
+.form-group textarea { resize:vertical; min-height:90px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.btn-primary {
+  width:100%; padding:15px;
+  background:linear-gradient(135deg,var(--teal-mid),var(--teal-accent));
+  border:none; border-radius:var(--r-md); color:white;
+  font-size:15px; font-weight:700; cursor:pointer;
+  font-family:'Outfit',sans-serif; transition:all .2s; margin-top:6px;
+  letter-spacing:-.01em;
+  box-shadow:0 4px 16px rgba(26,80,96,.35);
+}
+.btn-primary:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(26,80,96,.45); }
+.btn-primary:active { transform:translateY(0); opacity:.9; }
+.btn-secondary {
+  padding:11px 20px; background:var(--surface);
+  border:1.5px solid var(--surface3); border-radius:var(--r-md);
+  color:var(--text2); font-size:13px; font-weight:600;
+  cursor:pointer; font-family:'Outfit',sans-serif; transition:all .15s;
+}
+.btn-danger {
+  padding:11px 20px; background:var(--red-bg);
+  border:1.5px solid rgba(220,38,38,.15); border-radius:var(--r-md);
+  color:var(--red); font-size:13px; font-weight:600;
+  cursor:pointer; font-family:'Outfit',sans-serif;
+}
+
+/* ─────────────────────── DETAIL PANEL ─────────────────────── */
+.detail-modal { display:none; position:fixed; inset:0; background:rgba(10,30,30,.65); z-index:500; align-items:flex-end; }
+.detail-modal.show { display:flex; }
+.detail-panel {
+  background:var(--surface); border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:26px 22px 36px; width:100%; max-height:90vh;
+  overflow-y:auto; animation:slideUp .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -8px 40px rgba(10,30,30,.2);
+}
+.detail-av {
+  width:72px; height:72px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; font-weight:800; color:white; margin:0 auto 14px;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.detail-name { font-size:22px; font-weight:800; text-align:center; color:var(--text); letter-spacing:-.03em; }
+.detail-role { font-size:12.5px; color:var(--text4); text-align:center; margin-top:5px; font-weight:500; }
+.detail-info { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
+.di-box { background:var(--white); border-radius:var(--r-md); padding:14px; border:1px solid var(--border); }
+.di-lbl { font-size:9.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--text4); font-weight:700; }
+.di-val { font-size:14px; font-weight:600; color:var(--text); margin-top:5px; }
+.detail-actions { display:flex; gap:10px; margin-top:18px; }
+.detail-actions button { flex:1; }
+
+/* ─────────────────────── TOAST ─────────────────────── */
+.toast {
+  position:fixed; bottom:90px; left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--teal-darkest); color:white;
+  padding:12px 22px; border-radius:var(--r-lg);
+  font-size:13px; font-weight:600; z-index:1000;
+  opacity:0; transition:all .28s cubic-bezier(.4,0,.2,1);
+  pointer-events:none; white-space:nowrap;
+  box-shadow:0 4px 20px rgba(10,30,30,.4);
+  border:1px solid rgba(60,140,140,.18);
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ─────────────────────── SEARCH ─────────────────────── */
+.search-box {
+  display:flex; align-items:center; gap:10px;
+  background:var(--white); border:1.5px solid var(--surface3);
+  border-radius:var(--r-md); padding:12px 16px; margin-bottom:14px;
+  transition:border-color .18s, box-shadow .18s;
+  box-shadow:var(--shadow-xs);
+}
+.search-box:focus-within { border-color:var(--teal-accent); box-shadow:0 0 0 3px rgba(26,80,96,.1); }
+.search-box input { flex:1; border:none; outline:none; font-size:14px; background:none; font-family:'Outfit',sans-serif; color:var(--text); font-weight:500; }
+.search-box span { color:var(--text4); font-size:16px; }
+
+/* ─────────────────────── FILTER TABS ─────────────────────── */
+.filter-tabs { display:flex; gap:7px; overflow-x:auto; scrollbar-width:none; margin-bottom:16px; padding-bottom:2px; }
+.filter-tabs::-webkit-scrollbar { display:none; }
+.ftab {
+  padding:8px 16px; border-radius:20px; font-size:12.5px; font-weight:600;
+  cursor:pointer; white-space:nowrap;
+  border:1.5px solid var(--surface3); background:var(--white);
+  color:var(--text3); transition:all .18s;
+}
+.ftab.active { background:var(--teal-accent); color:white; border-color:var(--teal-accent); box-shadow:0 2px 10px rgba(26,80,96,.3); }
+.ftab:hover:not(.active) { border-color:var(--border2); color:var(--text); }
+
+/* ─────────────────────── PAGE HEADER ─────────────────────── */
+.page-hdr { margin-bottom:20px; }
+.page-hdr h2 { font-size:26px; font-weight:800; color:var(--text); letter-spacing:-.03em; }
+.page-hdr p { font-size:13px; color:var(--text4); margin-top:4px; font-weight:500; }
+
+/* ─────────────────────── FAB ─────────────────────── */
+.fab {
+  position:fixed; bottom:82px; right:18px;
+  width:54px; height:54px; border-radius:50%;
+  background:linear-gradient(135deg,var(--teal-mid),var(--teal-accent));
+  border:none; color:white; font-size:24px; cursor:pointer;
+  box-shadow:0 4px 20px rgba(26,80,96,.5);
+  z-index:90; display:none; align-items:center; justify-content:center;
+  transition:transform .18s, box-shadow .18s;
+}
+.fab:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(26,80,96,.6); }
+.fab:active { transform:scale(.93); }
+
+/* ─────────────────────── TRANSACTIONS ─────────────────────── */
+.tr-row {
+  display:flex; align-items:center; gap:13px;
+  padding:14px 20px; border-bottom:1px solid var(--border);
+  cursor:pointer; transition:background .15s;
+}
+.tr-row:last-child { border-bottom:none; }
+.tr-row:hover { background:var(--surface3); }
+.tr-ico { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.tr-info { flex:1; min-width:0; }
+.tr-name { font-size:13.5px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tr-date { font-size:11px; color:var(--text4); margin-top:2px; }
+.tr-amount { font-size:15px; font-weight:800; flex-shrink:0; letter-spacing:-.02em; }
+.tr-rec { color:var(--green); }
+.tr-dep { color:var(--red); }
+
+/* ─────────────────────── HIZB / CORAN ─────────────────────── */
+/* ─────────────────────── HEURES DE PRIÈRES ─────────────────────── */
+.prayer-card {
+  background:linear-gradient(135deg, #0A1E1E 0%, #1A4848 55%, #1A5060 100%);
+  border-radius:var(--r-xl); margin-bottom:20px; position:relative;
+  overflow:hidden; border:1px solid rgba(60,140,140,.2);
+  box-shadow:0 10px 40px rgba(10,30,30,.3), 0 2px 8px rgba(10,30,30,.15);
+}
+.prayer-icon { width:32px; height:32px; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; }
+.prayer-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  padding:18px 20px 14px;
+}
+.prayer-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(212,146,26,.18); border:1px solid rgba(212,146,26,.28);
+  color:var(--gold-glow); font-size:10px; font-weight:600;
+  padding:4px 10px; border-radius:20px; margin-bottom:8px;
+}
+.prayer-city { font-size:12px; color:rgba(255,255,255,.45); font-weight:500; }
+.prayer-next-wrap { text-align:right; flex-shrink:0; }
+.prayer-next-lbl { font-size:9px; color:rgba(255,255,255,.35); text-transform:uppercase; letter-spacing:.08em; font-weight:600; margin-bottom:2px; }
+.prayer-next-name { font-size:15px; font-weight:800; color:var(--gold-glow); line-height:1; }
+.prayer-next-time { font-size:22px; font-weight:900; color:white; line-height:1.1; letter-spacing:-.03em; margin-top:2px; }
+.prayer-countdown { font-size:10px; color:rgba(245,200,66,.7); margin-top:3px; font-weight:600; letter-spacing:.04em; }
+.prayer-grid {
+  display:grid; grid-template-columns:repeat(5,1fr);
+  border-top:1px solid rgba(60,140,140,.15);
+}
+.prayer-item {
+  padding:14px 6px; text-align:center;
+  border-right:1px solid rgba(60,140,140,.1);
+  transition:background .2s; cursor:default; position:relative;
+}
+.prayer-item:last-child { border-right:none; }
+.prayer-item.current { background:rgba(212,146,26,.14); }
+.prayer-item.current::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+}
+.prayer-item.passed { opacity:.45; }
+.prayer-name { font-size:10px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.07em; margin-bottom:5px; }
+.prayer-item.current .prayer-name { color:var(--gold-glow); }
+.prayer-time { font-size:15px; font-weight:800; color:white; letter-spacing:-.02em; }
+.prayer-item.current .prayer-time { color:var(--gold-glow); }
+
+/* ─────────────────────── EVENTS CARD BLEU ─────────────────────── */
+.ev-card-blue {
+  background:linear-gradient(135deg, #0A1E1E 0%, #1A4848 55%, #1A5060 100%);
+  border-radius:var(--r-xl); overflow:hidden; margin-bottom:16px;
+  border:1px solid rgba(60,140,140,.2);
+  box-shadow:0 8px 32px rgba(10,30,30,.25);
+  position:relative;
+}
+.ev-card-blue::before {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:200px; height:200px; border-radius:50%;
+  border:1px solid rgba(212,146,26,.1);
+  animation:pulse 4s ease-in-out infinite; pointer-events:none;
+}
+.ev-card-blue::after {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 70% 20%, rgba(60,140,140,.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+.ev-card-blue .card-hdr {
+  border-bottom:1px solid rgba(60,140,140,.2);
+  position:relative; z-index:1;
+}
+.ev-card-blue .card-hdr h4 { color:rgba(255,255,255,.9); }
+.ev-card-blue .card-hdr button.link { color:var(--gold-glow); }
+.ev-blue-row {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 20px; border-bottom:1px solid rgba(60,140,140,.12);
+  cursor:pointer; transition:background .15s; position:relative; z-index:1;
+}
+.ev-blue-row:last-child { border-bottom:none; }
+.ev-blue-row:hover { background:rgba(255,255,255,.05); }
+.ev-blue-date {
+  min-width:44px; text-align:center;
+  background:rgba(255,255,255,.07); border-radius:var(--r-sm);
+  padding:8px 5px; border:1px solid rgba(212,146,26,.2); flex-shrink:0;
+}
+.ev-blue-day { font-size:20px; font-weight:800; color:var(--gold-glow); line-height:1; }
+.ev-blue-mon { font-size:9px; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.06em; margin-top:1px; font-weight:600; }
+.ev-blue-title { font-size:13px; font-weight:600; color:rgba(255,255,255,.88); letter-spacing:-.01em; }
+.ev-blue-desc { font-size:11px; color:rgba(255,255,255,.38); margin-top:2px; }
+.ev-blue-tag { font-size:9px; font-weight:700; padding:2px 8px; border-radius:20px; display:inline-flex; margin-top:4px; text-transform:uppercase; letter-spacing:.05em; }
+.ev-blue-tag.t-reu { background:rgba(26,80,96,.5); color:rgba(100,200,220,.9); border:1px solid rgba(60,140,140,.3); }
+.ev-blue-tag.t-coran { background:rgba(212,146,26,.2); color:var(--gold-glow); border:1px solid rgba(212,146,26,.3); }
+.ev-blue-tag.t-soc { background:rgba(22,163,74,.2); color:rgba(100,220,150,.9); border:1px solid rgba(22,163,74,.3); }
+.ev-blue-heure { margin-left:auto; flex-shrink:0; text-align:right; }
+.ev-blue-heure-val { font-size:14px; font-weight:800; color:var(--gold-glow); }
+.ev-blue-heure-lbl { font-size:9px; color:rgba(255,255,255,.3); margin-top:1px; }
+
+/* ─────────────────────── HIZB / CORAN ─────────────────────── */
+.hizb-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding:16px; }
+.hizb-cell {
+  aspect-ratio:1; border-radius:var(--r-sm);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; cursor:pointer;
+  transition:all .2s; border:2px solid transparent;
+  padding:4px 2px;
+}
+.juz-lbl { font-size:8px; font-weight:600; opacity:.7; letter-spacing:.04em; line-height:1; }
+.juz-num { font-size:14px; font-weight:800; line-height:1.1; }
+.hizb-free { background:rgba(26,80,96,.07); color:var(--text4); border-color:rgba(26,80,96,.15); }
+.hizb-free:hover { background:rgba(26,80,96,.15); border-color:var(--teal-accent); color:var(--teal-accent); }
+.hizb-mine { background:linear-gradient(135deg,#0A1E1E,#1A4848,#1A5060); color:var(--gold-glow); box-shadow:0 3px 12px rgba(10,30,30,.35); border-color:rgba(212,146,26,.3); }
+.hizb-taken { background:rgba(26,80,96,.12); color:var(--teal-accent); border-color:rgba(26,80,96,.2); opacity:.7; }
+.hizb-done { background:linear-gradient(135deg,#0A2818,#0F3525,#164832); color:rgba(100,220,150,.9); border-color:rgba(22,163,74,.3); box-shadow:0 2px 8px rgba(22,163,74,.12); }
+
+/* ─────────────────────── ANNOUNCEMENTS ─────────────────────── */
+.ann-item { padding:18px 20px; border-bottom:1px solid var(--border); }
+.ann-item:last-child { border-bottom:none; }
+.ann-top { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.ann-av {
+  width:34px; height:34px; border-radius:50%;
+  background:linear-gradient(135deg,var(--teal-accent),var(--teal-bright));
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:800; color:white; flex-shrink:0;
+}
+.ann-author { font-size:12.5px; font-weight:700; color:var(--text); }
+.ann-date { font-size:10.5px; color:var(--text4); margin-top:1px; }
+.ann-title { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; letter-spacing:-.01em; }
+.ann-body { font-size:13px; color:var(--text2); line-height:1.65; }
+
+/* ─────────────────────── BOTTOM NAV ─────────────────────── */
+.bottom-nav {
+  position:fixed; bottom:0; left:0; right:0;
+  background:rgba(250,250,247,.96);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-top:1px solid var(--border);
+  display:flex;
+  padding:10px 0 max(10px,env(safe-area-inset-bottom));
+  z-index:100;
+  box-shadow:0 -1px 20px rgba(10,30,30,.07);
+}
+.bn-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; padding:3px 0; transition:all .18s; }
+.bn-icon { font-size:21px; line-height:1; display:flex; align-items:center; justify-content:center; height:24px; }
+.bn-lbl { font-size:9.5px; font-weight:600; color:var(--text4); }
+.bn-item.active .bn-lbl { color:var(--teal-accent); }
+.bn-item.active .bn-icon { filter:drop-shadow(0 2px 4px rgba(26,80,96,.4)); }
+.bn-add { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; cursor:pointer; margin-top:-24px; }
+.bn-add-circle {
+  width:54px; height:54px; border-radius:50%;
+  background:linear-gradient(135deg,var(--teal-mid),var(--teal-accent));
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; color:white; border:3px solid var(--surface);
+  box-shadow:0 4px 18px rgba(26,80,96,.5), 0 2px 6px rgba(26,80,96,.3);
+  transition:transform .18s;
+}
+.bn-add:active .bn-add-circle { transform:scale(.92); }
+.bn-add span { font-size:9.5px; font-weight:700; color:var(--teal-accent); margin-top:3px; }
+
+/* ─────────────────────── NOTIFICATIONS ─────────────────────── */
+.notif-item { display:flex; gap:13px; padding:16px 20px; border-bottom:1px solid var(--border); cursor:pointer; transition:background .15s; }
+.notif-item.unread { background:rgba(26,80,96,.04); }
+.notif-item:hover { background:var(--surface3); }
+.notif-item:last-child { border-bottom:none; }
+.notif-dot { width:8px; height:8px; border-radius:50%; background:var(--teal-accent); margin-top:6px; flex-shrink:0; }
+.notif-dot.read { background:transparent; border:1.5px solid var(--border2); }
+.notif-text { font-size:13.5px; color:var(--text); line-height:1.5; font-weight:500; }
+.notif-time { font-size:10.5px; color:var(--text4); margin-top:3px; }
+
+/* ─────────────────────── COTIS SYSTEM ─────────────────────── */
+.cotis-summary { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-bottom:1px solid var(--border); }
+.cs-box { padding:16px 18px; text-align:center; border-right:1px solid var(--border); }
+.cs-box:last-child { border-right:none; }
+.cs-num { font-size:24px; font-weight:800; letter-spacing:-.03em; }
+.cs-lbl { font-size:10px; color:var(--text4); margin-top:3px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+.member-cotis-row { display:flex; align-items:center; gap:13px; padding:14px 20px; border-bottom:1px solid var(--border); cursor:pointer; transition:background .15s; }
+.member-cotis-row:last-child { border-bottom:none; }
+.member-cotis-row:hover { background:var(--surface3); }
+.cotis-months-mini { display:flex; gap:3px; flex-wrap:wrap; margin-top:6px; }
+.cmm { width:20px; height:20px; border-radius:5px; font-size:8px; display:flex; align-items:center; justify-content:center; font-weight:800; }
+.cmm-paid { background:var(--green); color:white; }
+.cmm-due { background:var(--red); color:white; }
+.cmm-future { background:var(--surface3); color:var(--text4); }
+
+.cotis-detail { padding:0; }
+.cd-header {
+  background:linear-gradient(135deg,var(--teal-darkest),var(--teal-mid));
+  padding:28px 22px; text-align:center; position:relative;
+}
+.cd-name { font-size:20px; font-weight:800; color:white; margin-top:12px; letter-spacing:-.02em; }
+.cd-sub { font-size:12px; color:rgba(255,255,255,.4); margin-top:5px; }
+.cd-year-selector { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--border); }
+.cd-year { font-size:17px; font-weight:800; }
+.cd-year-btn { width:34px; height:34px; border-radius:50%; border:1.5px solid var(--border2); background:var(--white); cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .15s; }
+.cd-year-btn:hover { border-color:var(--teal-accent); color:var(--teal-accent); }
+.cd-months { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:16px; }
+.cd-month-cell { border-radius:var(--r-md); padding:14px 8px; text-align:center; cursor:pointer; border:1.5px solid transparent; transition:all .2s; position:relative; }
+.cdm-paid { background:var(--green-bg); border-color:rgba(22,163,74,.3); }
+.cdm-due { background:var(--red-bg); border-color:rgba(220,38,38,.25); }
+.cdm-future { background:var(--surface2); border-color:var(--border); }
+.cdm-name { font-size:13px; font-weight:700; display:block; }
+.cdm-amount { font-size:10.5px; display:block; margin-top:3px; }
+.cdm-check { position:absolute; top:5px; right:7px; font-size:12px; }
+.cd-total-bar { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; background:var(--surface); border-top:1px solid var(--border); }
+.cd-total-label { font-size:12px; color:var(--text4); font-weight:600; }
+.cd-total-val { font-size:20px; font-weight:800; color:var(--green); letter-spacing:-.02em; }
+
+/* ─────────────────────── DESKTOP ─────────────────────── */
+@media(min-width:768px) {
+  .sidebar { transform:translateX(0) !important; }
+  .overlay { display:none !important; }
+  .hamburger, .bottom-nav { display:none !important; }
+  .main { margin-left:var(--sidebar-w); }
+  .topbar { padding:0 32px; height:68px; }
+  .page { padding:28px 32px 36px; }
+  .qa-grid { grid-template-columns:repeat(4,1fr); gap:14px; }
+  .scroll-row { overflow-x:visible; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .stat-card { min-width:unset; }
+  .two-col { display:grid; grid-template-columns:1fr 360px; gap:18px; }
+  .two-col .card { margin-bottom:0; }
+  .bottom-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .bottom-row .card { margin-bottom:0; }
+  .modal-bg { align-items:center; }
+  .modal { border-radius:var(--r-xl); max-width:500px; }
+  .detail-modal { align-items:center; }
+  .detail-panel { border-radius:var(--r-xl); max-width:500px; margin:auto; }
+  .fab { display:none !important; }
+  .stat-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-teal); }
+  #onboarding .ob-slide { padding:40px 60px 0; }
+  .ob-illustration { width:260px; height:260px; }
+}
+@media(min-width:1200px) {
+  :root { --sidebar-w:272px; }
+  .page { padding:32px 40px 40px; }
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.page.active > * { animation:fadeUp .35s ease both; }
+.page.active > *:nth-child(2) { animation-delay:.04s; }
+.page.active > *:nth-child(3) { animation-delay:.08s; }
+.page.active > *:nth-child(4) { animation-delay:.12s; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     SPLASH SCREEN
+     ══════════════════════════════════════════════════════ -->
+<div id="splash">
+  <!-- Anneaux animés -->
+  <div class="splash-ring"></div>
+  <div class="splash-ring"></div>
+  <div class="splash-ring"></div>
+  <!-- Étoiles -->
+  <div class="splash-stars" id="splash-stars"></div>
+
+  <div class="splash-content">
+    <!-- Logo Coran -->
+    <div class="splash-logo-wrap">
+      <div class="splash-logo-inner">
+        <svg class="splash-coran-icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+          <line x1="9" y1="7" x2="15" y2="7" stroke-width="1.2" opacity=".6"/>
+          <line x1="9" y1="10" x2="15" y2="10" stroke-width="1.2" opacity=".6"/>
+          <line x1="9" y1="13" x2="13" y2="13" stroke-width="1.2" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Nom app -->
+    <div class="splash-app-name">Sunu <span>Dahira</span></div>
+    <div class="splash-tagline">CUDIS · Confrérie Mouridiya · Sénégal</div>
+
+    <!-- Loader avec barre de progression -->
+    <div class="splash-loader">
+      <div class="splash-dots">
+        <div class="splash-dot"></div>
+        <div class="splash-dot"></div>
+        <div class="splash-dot"></div>
+      </div>
+      <div class="splash-progress-wrap">
+        <div class="splash-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="splash-bottom">Powered by CUDIS</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     ONBOARDING
+     ══════════════════════════════════════════════════════ -->
+<div id="onboarding">
+  <div class="ob-slides-wrap">
+    <div class="ob-slides" id="ob-slides">
+
+      <!-- Slide 1 — Bienvenue / Dahira -->
+      <div class="ob-slide">
+        <div class="ob-illustration ob-ill-1">
+          <!-- Carte mini Dahira style hero -->
+          <div style="padding:18px;width:100%;position:relative;z-index:1">
+            <div class="ob-mini-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Dahira
+            </div>
+            <div class="ob-mini-title">Al-Mouridiya<br>Dakar–Plateau</div>
+            <div class="ob-mini-sub">Affilié CUDIS · Confrérie Mouridiya</div>
+            <div class="ob-mini-stats">
+              <div class="ob-ms"><div class="ob-ms-val">47</div><div class="ob-ms-lbl">Membres</div></div>
+              <div class="ob-ms"><div class="ob-ms-val">485k</div><div class="ob-ms-lbl">Caisse</div></div>
+              <div class="ob-ms"><div class="ob-ms-val">92%</div><div class="ob-ms-lbl">Cotis.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ob-title">Bienvenue sur<br><em>Sunu Dahira</em></div>
+        <div class="ob-desc">Gérez votre communauté spirituelle Mouridiya en toute simplicité, de partout.</div>
+      </div>
+
+      <!-- Slide 2 — Communauté -->
+      <div class="ob-slide">
+        <div class="ob-illustration ob-ill-2" style="flex-direction:column;gap:0;padding:16px;height:auto;min-height:200px">
+          <div class="ob-avatars" style="margin-bottom:4px">
+            <div class="ob-av" style="background:linear-gradient(135deg,#0A1E1E,#1A4848)">FA</div>
+            <div class="ob-av" style="background:linear-gradient(135deg,#D4921A,#F0B429)">MN</div>
+            <div class="ob-av" style="background:linear-gradient(135deg,#1A5060,#3A8898)">AS</div>
+            <div class="ob-av" style="background:linear-gradient(135deg,#5B4FC4,#9080E0)">IM</div>
+            <div class="ob-av" style="background:linear-gradient(135deg,#16A34A,#4ade80)">RD</div>
+            <div class="ob-av" style="background:rgba(26,80,96,.15);border:2px solid rgba(26,80,96,.2);color:var(--teal-accent);font-size:11px">+42</div>
+          </div>
+          <div class="ob-feature-list">
+            <div class="ob-feature">
+              <div class="ob-feature-ico"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div><div class="ob-feature-txt">Gestion des membres</div><div class="ob-feature-sub">Profils, statuts, commissions</div></div>
+            </div>
+            <div class="ob-feature">
+              <div class="ob-feature-ico"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/></svg></div>
+              <div><div class="ob-feature-txt">Annonces & Événements</div><div class="ob-feature-sub">Communiquer & planifier</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ob-title">Votre communauté<br><em>unie et connectée</em></div>
+        <div class="ob-desc">Suivez chaque membre, publiez des annonces et organisez vos événements facilement.</div>
+      </div>
+
+      <!-- Slide 3 — Finances & Coran -->
+      <div class="ob-slide">
+        <div class="ob-illustration ob-ill-3" style="flex-direction:column;justify-content:center;padding:14px">
+          <div class="ob-fin-bars" style="margin-bottom:6px">
+            <div class="ob-bar" style="height:50px;background:linear-gradient(to top,rgba(26,80,96,.4),rgba(58,136,152,.6))"></div>
+            <div class="ob-bar" style="height:80px;background:linear-gradient(to top,rgba(26,80,96,.5),rgba(58,136,152,.8))"></div>
+            <div class="ob-bar" style="height:60px;background:linear-gradient(to top,rgba(212,146,26,.4),rgba(245,200,66,.6))"></div>
+            <div class="ob-bar" style="height:95px;background:linear-gradient(to top,rgba(26,80,96,.6),rgba(58,136,152,1))"></div>
+            <div class="ob-bar" style="height:70px;background:linear-gradient(to top,rgba(212,146,26,.5),rgba(245,200,66,.8))"></div>
+            <div class="ob-bar" style="height:55px;background:linear-gradient(to top,rgba(26,80,96,.4),rgba(58,136,152,.6))"></div>
+          </div>
+          <div class="ob-fin-grid">
+            <div class="ob-fin-box"><div class="ob-fin-val">485k</div><div class="ob-fin-lbl">Solde FCFA</div></div>
+            <div class="ob-fin-box"><div class="ob-fin-val" style="color:rgba(100,220,120,.9)">92%</div><div class="ob-fin-lbl">Cotisations</div></div>
+            <div class="ob-fin-box" style="grid-column:span 2;background:rgba(212,146,26,.12);border-color:rgba(212,146,26,.3)">
+              <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-glow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                <div style="text-align:left"><div style="font-size:13px;font-weight:700;color:var(--gold-glow)">Lecture Coran</div><div style="font-size:10px;color:rgba(255,255,255,.35)">Hizbs collectifs</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ob-title">Finances & <em>Spiritualité</em></div>
+        <div class="ob-desc">Suivez les cotisations, gérez la trésorerie et coordonnez la lecture collective du Saint Coran.</div>
+      </div>
+
+    </div><!-- /ob-slides -->
+  </div>
+
+  <!-- Dots -->
+  <div class="ob-dots">
+    <div class="ob-dot active" id="ob-dot-0"></div>
+    <div class="ob-dot" id="ob-dot-1"></div>
+    <div class="ob-dot" id="ob-dot-2"></div>
+  </div>
+
+  <!-- Footer buttons -->
+  <div class="ob-footer">
+    <button class="ob-btn-next" id="ob-next">
+      <span id="ob-next-label">Suivant</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="ob-next-icon"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <button class="ob-btn-skip" id="ob-skip" onclick="launchApp()">Passer</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     APP
+     ══════════════════════════════════════════════════════ -->
+<div id="app" style="display:none">
+
+<div class="toast" id="toast"></div>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg></div>
+    <div class="sb-brand"><h1>Sunu Dahira</h1><small>CUDIS · Sénégal</small></div>
+    <button class="sb-close" onclick="closeSidebar()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  </div>
+  <span class="sb-sec">Principal</span>
+  <a class="nav-item active" onclick="goPage('dashboard',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Tableau de bord</a>
+  <a class="nav-item" onclick="goPage('membres',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Membres</a>
+  <span class="sb-sec">Gestion</span>
+  <a class="nav-item" onclick="goPage('finances',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></span> Finances</a>
+  <a class="nav-item" onclick="goPage('cotisations',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span> Cotisations</a>
+  <a class="nav-item" onclick="goPage('evenements',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span> Événements</a>
+  <a class="nav-item" onclick="goPage('annonces',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span> Annonces</a>
+  <span class="sb-sec">Spirituel</span>
+  <a class="nav-item" onclick="goPage('coran',this)"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span> Lecture Coran</a>
+  <div class="sb-footer">
+    <div class="u-card">
+      <div class="u-av">MA</div>
+      <div><div class="u-name">Moussa Amar</div><div class="u-role">Président</div></div>
+    </div>
+  </div>
+</nav>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <div class="tb-left">
+      <div class="hamburger" onclick="openSidebar()"><span></span><span></span><span></span></div>
+      <div class="tb-brand">Sunu Dahira<small id="tb-page">Tableau de bord</small></div>
+    </div>
+    <div class="tb-right">
+      <div class="tb-btn" onclick="goPage('notifications',null)" id="notif-btn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><div class="notif-badge" id="notif-count">3</div></div>
+      <div class="tb-btn" style="overflow:hidden;padding:0"><div class="u-av" style="width:100%;height:100%;border-radius:9px;font-size:12px">MA</div></div>
+    </div>
+  </header>
+
+  <!-- PAGE: DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div class="hero">
+      <div class="hero-shimmer"></div>
+      <div class="hero-top">
+        <div>
+          <div class="hero-badge"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Tableau de bord</div>
+          <div class="hero-title">Dahira Al-Mouridiya<br>Dakar–Plateau</div>
+          <div class="hero-sub">Affilié CUDIS · Confrérie Mouridiya</div>
+        </div>
+        <div class="hero-arabic" style="opacity:.15;filter:drop-shadow(0 0 20px rgba(212,146,26,.5))"><svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg></div>
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="val" id="db-members">0</div><div class="lbl">Membres</div></div>
+        <div class="h-stat"><div class="val" id="db-solde">0</div><div class="lbl">Solde FCFA</div></div>
+        <div class="h-stat"><div class="val" id="db-cotis">0%</div><div class="lbl">Cotisations</div></div>
+      </div>
+    </div>
+        <!-- CARTE HEURES DE PRIÈRES -->
+    <div class="prayer-card" id="prayer-card">
+      <!-- Header carte -->
+      <div class="prayer-header">
+        <div>
+          <div class="prayer-badge">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            Heures de Prières · Dakar
+          </div>
+          <div class="prayer-city" id="prayer-hijri">Chargement...</div>
+        </div>
+        <div class="prayer-next-wrap">
+          <div class="prayer-next-lbl">Prochaine</div>
+          <div class="prayer-next-name" id="next-prayer-name">—</div>
+          <div class="prayer-next-time" id="next-prayer-time">—</div>
+          <div class="prayer-countdown" id="prayer-countdown">—</div>
+        </div>
+      </div>
+      <!-- Grille des 5 prières -->
+      <div class="prayer-grid" id="prayer-grid"></div>
+    </div>
+
+    <div class="scroll-row" id="db-stats"></div>
+    <div class="sec-title"><h3>Actions rapides</h3></div>
+    <div class="qa-grid">
+
+      <div class="qa-btn" onclick="openModal('modal-transaction')"><div class="qa-ico-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="qa-label">Cotisation</div><div class="qa-sub">Recette / dépense</div></div></div>
+      <div class="qa-btn" onclick="openModal('modal-annonce')"><div class="qa-ico-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div><div><div class="qa-label">Annonce</div><div class="qa-sub">Notifier membres</div></div></div>
+      <div class="qa-btn" onclick="openModal('modal-evenement')"><div class="qa-ico-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div><div><div class="qa-label">Événement</div><div class="qa-sub">Planifier</div></div></div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-hdr"><h4>Membres récents</h4><button class="link" onclick="goPage('membres',null)">Voir tout →</button></div>
+        <div id="db-membres-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><h4>Prochains événements</h4><button class="link" onclick="goPage('evenements',null)">Tout →</button></div>
+        <div id="db-events-list"></div>
+      </div>
+    </div>
+    <div class="bottom-row">
+      <div class="card">
+        <div class="card-hdr"><h4>Finances du mois</h4><button class="link" onclick="goPage('finances',null)">Rapport →</button></div>
+        <div class="fin-row">
+          <div class="fin-box fb-rec"><div class="fb-lbl">Recettes</div><div class="fb-amt" id="db-rec">0</div><div class="fb-sub">FCFA ce mois</div></div>
+          <div class="fin-box fb-dep"><div class="fb-lbl">Dépenses</div><div class="fb-amt" id="db-dep">0</div><div class="fb-sub">FCFA ce mois</div></div>
+        </div>
+        <div class="bar-chart"><div class="bc-lbl">Dernières transactions</div><div id="db-bar-chart"></div></div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><h4>Cotisations par commission</h4><button class="link" onclick="goPage('cotisations',null)">Détail →</button></div>
+        <div id="db-progress"></div>
+      </div>
+    </div>
+
+    <!-- CARD ÉVÉNEMENTS BLEUE DÉGRADÉE -->
+    <div class="ev-card-blue">
+      <div class="card-hdr">
+        <h4 style="color:rgba(255,255,255,.9)">Agenda — Prochains événements</h4>
+        <button class="link" onclick="goPage('evenements',null)" style="color:var(--gold-glow)">Voir tout →</button>
+      </div>
+      <div id="db-events-blue-list"></div>
+    </div>
+
+  </div>
+
+  <!-- PAGE: MEMBRES -->
+  <div class="page" id="page-membres">
+    <div class="page-hdr"><h2>Membres</h2><p id="membres-count">0 membres enregistrés</p></div>
+    <div class="search-box"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="text" placeholder="Rechercher un membre…" oninput="filterMembres(this.value)" id="search-membres"></div>
+    <div class="filter-tabs" id="ftabs-membres">
+      <div class="ftab active" onclick="setMFilter('tous',this)">Tous</div>
+      <div class="ftab" onclick="setMFilter('actif',this)">Actifs</div>
+      <div class="ftab" onclick="setMFilter('sympathisant',this)">Sympathisants</div>
+      <div class="ftab" onclick="setMFilter('retard',this)">En retard</div>
+    </div>
+    <div id="membres-list"></div>
+    <button class="fab" id="fab-membres" onclick="openModal('modal-membre')" style="display:flex">+</button>
+  </div>
+
+  <!-- PAGE: FINANCES -->
+  <div class="page" id="page-finances">
+    <div class="page-hdr"><h2>Finances</h2><p>Recettes et dépenses du dahira</p></div>
+    <div class="scroll-row" id="fin-stats"></div>
+    <div class="filter-tabs">
+      <div class="ftab active" onclick="setTFilter('tous',this)">Toutes</div>
+      <div class="ftab" onclick="setTFilter('recette',this)">Recettes</div>
+      <div class="ftab" onclick="setTFilter('depense',this)">Dépenses</div>
+    </div>
+    <div class="card"><div id="transactions-list"></div></div>
+    <button class="fab" id="fab-fin" onclick="openModal('modal-transaction')" style="display:flex">+</button>
+  </div>
+
+  <!-- PAGE: COTISATIONS -->
+  <div class="page" id="page-cotisations">
+    <div class="page-hdr"><h2>Cotisations</h2><p>Suivi des cotisations par membre</p></div>
+    <div class="card">
+      <div class="card-hdr"><h4>Par commission</h4></div>
+      <div id="cotis-progress"></div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><h4>Statut membres</h4></div>
+      <div id="cotis-membres"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: ÉVÉNEMENTS -->
+  <div class="page" id="page-evenements">
+    <div class="page-hdr"><h2>Événements</h2><p>Calendrier des activités</p></div>
+    <div class="filter-tabs">
+      <div class="ftab active" onclick="setEvFilter('tous',this)">Tous</div>
+      <div class="ftab" onclick="setEvFilter('Réunion',this)">Réunions</div>
+      <div class="ftab" onclick="setEvFilter('Spirituel',this)">Spirituels</div>
+      <div class="ftab" onclick="setEvFilter('Social',this)">Sociaux</div>
+    </div>
+    <div id="events-list"></div>
+    <button class="fab" id="fab-ev" onclick="openModal('modal-evenement')" style="display:flex">+</button>
+  </div>
+
+  <!-- PAGE: ANNONCES -->
+  <div class="page" id="page-annonces">
+    <div class="page-hdr"><h2>Annonces</h2><p>Communiqués du dahira</p></div>
+    <div class="card"><div id="annonces-list"></div></div>
+    <button class="fab" id="fab-ann" onclick="openModal('modal-annonce')" style="display:flex">+</button>
+  </div>
+
+  <!-- PAGE: CORAN -->
+  <div class="page" id="page-coran">
+    <div class="page-hdr"><h2>Lecture Coran</h2><p>Session collective — choisissez votre Hizb</p></div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-hdr"><h4>Progression de la session</h4></div>
+      <div style="padding:16px 18px">
+        <div class="prog-track" style="height:8px;margin-bottom:8px"><div class="prog-fill" id="coran-prog" style="width:0%"></div></div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:11px;color:var(--text4)" id="coran-stat">0 / 30 Parties complétées</span>
+          <span style="font-size:11px;color:var(--teal-accent);font-weight:600" id="coran-pct">0%</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><h4>Sélection des 30 Juz' (Parties)</h4><span style="font-size:11px;color:var(--text4)">Touchez pour réserver</span></div>
+      <div class="hizb-grid" id="hizb-grid"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: NOTIFICATIONS -->
+  <div class="page" id="page-notifications">
+    <div class="page-hdr"><h2>Notifications</h2></div>
+    <div class="card"><div id="notif-list"></div></div>
+  </div>
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bn-item active" id="bn-dashboard" onclick="goPage('dashboard',null);setBN('bn-dashboard')">
+    <div class="bn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bn-lbl">Accueil</div>
+  </div>
+  <div class="bn-item" id="bn-membres" onclick="goPage('membres',null);setBN('bn-membres')">
+    <div class="bn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="bn-lbl">Membres</div>
+  </div>
+  <div class="bn-add" onclick="openContextAdd()">
+    <div class="bn-add-circle">+</div>
+    <span>Ajouter</span>
+  </div>
+  <div class="bn-item" id="bn-finances" onclick="goPage('finances',null);setBN('bn-finances')">
+    <div class="bn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></div><div class="bn-lbl">Finances</div>
+  </div>
+  <div class="bn-item" id="bn-evenements" onclick="goPage('evenements',null);setBN('bn-evenements')">
+    <div class="bn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div><div class="bn-lbl">Agenda</div>
+  </div>
+</nav>
+
+<!-- MODALS -->
+<div class="modal-bg" id="modal-membre">
+  <div class="modal">
+    <div class="modal-hdr"><h3>Ajouter un membre</h3><button class="modal-close" onclick="closeModal('modal-membre')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="form-row">
+      <div class="form-group"><label>Prénom</label><input type="text" id="m-prenom" placeholder="Fatou"></div>
+      <div class="form-group"><label>Nom</label><input type="text" id="m-nom" placeholder="Amar"></div>
+    </div>
+    <div class="form-group"><label>Téléphone</label><input type="tel" id="m-tel" placeholder="+221 77 000 00 00"></div>
+    <div class="form-group"><label>Email (optionnel)</label><input type="email" id="m-email" placeholder="fatou@example.com"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Statut</label>
+        <select id="m-statut"><option value="actif">Membre actif</option><option value="sympathisant">Sympathisant</option><option value="diaspora">Diaspora</option></select>
+      </div>
+      <div class="form-group"><label>Commission</label>
+        <select id="m-commission"><option value="Finances">Finances</option><option value="Organisation">Organisation</option><option value="Communication">Communication</option><option value="Sociale">Sociale / RH</option><option value="Culturelle">Culturelle</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Cotisation mensuelle (FCFA)</label><input type="number" id="m-cotis" placeholder="15000" value="15000"></div>
+      <div class="form-group"><label>Date d'adhésion</label><input type="date" id="m-date"></div>
+    </div>
+    <button class="btn-primary" onclick="saveMembre()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Enregistrer le membre</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-transaction">
+  <div class="modal">
+    <div class="modal-hdr"><h3>Enregistrer une transaction</h3><button class="modal-close" onclick="closeModal('modal-transaction')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="form-group"><label>Type</label>
+      <select id="t-type"><option value="recette">Recette (entrée)</option><option value="depense">Dépense (sortie)</option></select>
+    </div>
+    <div class="form-group"><label>Description</label><input type="text" id="t-desc" placeholder="Cotisations mensuelles…"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Montant (FCFA)</label><input type="number" id="t-montant" placeholder="15000"></div>
+      <div class="form-group"><label>Date</label><input type="date" id="t-date"></div>
+    </div>
+    <div class="form-group"><label>Catégorie</label>
+      <select id="t-cat"><option>Cotisations</option><option>Dons / Zakat</option><option>Activités</option><option>Charges / Loyer</option><option>Matériel</option><option>Autre</option></select>
+    </div>
+    <div class="form-group"><label>Note (optionnel)</label><textarea id="t-note" placeholder="Remarques…"></textarea></div>
+    <button class="btn-primary" onclick="saveTransaction()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Enregistrer</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-evenement">
+  <div class="modal">
+    <div class="modal-hdr"><h3>Créer un événement</h3><button class="modal-close" onclick="closeModal('modal-evenement')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="form-group"><label>Titre</label><input type="text" id="ev-titre" placeholder="Séance hebdomadaire…"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Date</label><input type="date" id="ev-date"></div>
+      <div class="form-group"><label>Heure</label><input type="time" id="ev-heure" value="20:00"></div>
+    </div>
+    <div class="form-group"><label>Lieu</label><input type="text" id="ev-lieu" placeholder="Siège du dahira…"></div>
+    <div class="form-group"><label>Type</label>
+      <select id="ev-type"><option value="Réunion">Réunion</option><option value="Spirituel">Spirituel</option><option value="Social">Social</option></select>
+    </div>
+    <div class="form-group"><label>Description</label><textarea id="ev-desc" placeholder="Détails de l'événement…"></textarea></div>
+    <button class="btn-primary" onclick="saveEvenement()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Créer l'événement</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-annonce">
+  <div class="modal">
+    <div class="modal-hdr"><h3>Publier une annonce</h3><button class="modal-close" onclick="closeModal('modal-annonce')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="form-group"><label>Titre</label><input type="text" id="an-titre" placeholder="Information importante…"></div>
+    <div class="form-group"><label>Message</label><textarea id="an-body" placeholder="Chers membres du dahira…" style="min-height:120px"></textarea></div>
+    <div class="form-group"><label>Importance</label>
+      <select id="an-importance"><option value="normale">Normale</option><option value="urgente">Urgente !</option></select>
+    </div>
+    <button class="btn-primary" onclick="saveAnnonce()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Publier l'annonce</button>
+  </div>
+</div>
+
+<!-- DETAIL: COTISATIONS -->
+<div class="detail-modal" id="detail-cotis">
+  <div class="detail-panel" style="padding:0;border-radius:20px 20px 0 0;overflow:hidden">
+    <div class="cotis-detail">
+      <div class="cd-header">
+        <button class="modal-close" onclick="closeDetail('detail-cotis')" style="position:absolute;top:20px;right:20px;background:rgba(255,255,255,.15);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;color:white;display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        <div class="detail-av" id="cd-av" style="margin:0 auto 0"></div>
+        <div class="cd-name" id="cd-name"></div>
+        <div class="cd-sub" id="cd-sub"></div>
+      </div>
+      <div class="cotis-summary">
+        <div class="cs-box"><div class="cs-num" id="cd-paid" style="color:var(--green)">0</div><div class="cs-lbl">Mois payés</div></div>
+        <div class="cs-box"><div class="cs-num" id="cd-due" style="color:var(--red)">0</div><div class="cs-lbl">En retard</div></div>
+        <div class="cs-box"><div class="cs-num" id="cd-total-m">0</div><div class="cs-lbl">Total dû</div></div>
+      </div>
+      <div class="cd-year-selector">
+        <button class="cd-year-btn" onclick="changeCotisYear(-1)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <span class="cd-year" id="cd-year">2025</span>
+        <button class="cd-year-btn" onclick="changeCotisYear(1)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <div class="cd-months" id="cd-months-grid"></div>
+      <div class="cd-total-bar">
+        <span class="cd-total-label">Total collecté cette année</span>
+        <span class="cd-total-val" id="cd-year-total">0 FCFA</span>
+      </div>
+      <div style="padding:14px 18px 24px">
+        <button class="btn-primary" onclick="payAllDue()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Tout régler (mois dus)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL: MEMBRE -->
+<div class="detail-modal" id="detail-membre">
+  <div class="detail-panel">
+    <div class="modal-hdr"><span></span><button class="modal-close" onclick="closeDetail('detail-membre')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="detail-av" id="dm-av"></div>
+    <div class="detail-name" id="dm-name"></div>
+    <div class="detail-role" id="dm-role"></div>
+    <div class="detail-info">
+      <div class="di-box"><div class="di-lbl">Téléphone</div><div class="di-val" id="dm-tel"></div></div>
+      <div class="di-box"><div class="di-lbl">Statut</div><div class="di-val" id="dm-statut"></div></div>
+      <div class="di-box"><div class="di-lbl">Commission</div><div class="di-val" id="dm-commission"></div></div>
+      <div class="di-box"><div class="di-lbl">Cotisation</div><div class="di-val" id="dm-cotis"></div></div>
+      <div class="di-box"><div class="di-lbl">Adhésion</div><div class="di-val" id="dm-date"></div></div>
+      <div class="di-box"><div class="di-lbl">Email</div><div class="di-val" id="dm-email" style="font-size:11px"></div></div>
+    </div>
+    <div class="detail-actions">
+      <button class="btn-secondary" onclick="markCotisOk()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Cotisation payée</button>
+      <button class="btn-danger" onclick="deleteMembre()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg> Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL: ÉVÉNEMENT -->
+<div class="detail-modal" id="detail-evenement">
+  <div class="detail-panel">
+    <div class="modal-hdr"><h3>Détail événement</h3><button class="modal-close" onclick="closeDetail('detail-evenement')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div style="text-align:center;padding:8px 0 16px">
+      <div style="font-size:48px" id="dev-icon"></div>
+      <div style="font-size:18px;font-weight:700;margin-top:8px" id="dev-title"></div>
+    </div>
+    <div class="detail-info">
+      <div class="di-box"><div class="di-lbl">Date</div><div class="di-val" id="dev-date"></div></div>
+      <div class="di-box"><div class="di-lbl">Heure</div><div class="di-val" id="dev-heure"></div></div>
+      <div class="di-box"><div class="di-lbl">Lieu</div><div class="di-val" id="dev-lieu"></div></div>
+      <div class="di-box"><div class="di-lbl">Type</div><div class="di-val" id="dev-type"></div></div>
+    </div>
+    <div style="background:var(--surface2);border-radius:12px;padding:14px;margin-bottom:16px">
+      <div style="font-size:13px;color:var(--text2);line-height:1.6" id="dev-desc"></div>
+    </div>
+    <button class="btn-danger" style="width:100%" onclick="deleteEvenement()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg> Supprimer l'événement</button>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+/* ══════════════════════════════════════════════════════
+   SPLASH + ONBOARDING LOGIC
+   ══════════════════════════════════════════════════════ */
+
+// Générer étoiles dynamiques
+(function(){
+  const container=document.getElementById('splash-stars');
+  for(let i=0;i<18;i++){
+    const s=document.createElement('div');
+    s.className='splash-star';
+    const size=Math.random()*4+2;
+    s.style.cssText=`
+      width:${size}px;height:${size}px;
+      top:${Math.random()*100}%;left:${Math.random()*100}%;
+      animation-delay:${Math.random()*3}s;
+      animation-duration:${2+Math.random()*2}s;
+    `;
+    container.appendChild(s);
+  }
+})();
+
+let obCurrent=0;
+const OB_TOTAL=3;
+
+function obGoTo(idx){
+  obCurrent=idx;
+  document.getElementById('ob-slides').style.transform=`translateX(-${idx*100}%)`;
+  for(let i=0;i<OB_TOTAL;i++){
+    const d=document.getElementById('ob-dot-'+i);
+    if(d){d.classList.toggle('active',i===idx);}
+  }
+  const nextBtn=document.getElementById('ob-next');
+  const nextLabel=document.getElementById('ob-next-label');
+  const nextIcon=document.getElementById('ob-next-icon');
+  const skipBtn=document.getElementById('ob-skip');
+  if(idx===OB_TOTAL-1){
+    nextLabel.textContent="Commencer";
+    nextIcon.innerHTML='<polyline points="20 6 9 17 4 12"/>';
+    skipBtn.style.display='none';
+  } else {
+    nextLabel.textContent="Suivant";
+    nextIcon.innerHTML='<polyline points="9 18 15 12 9 6"/>';
+    skipBtn.style.display='block';
+  }
+}
+
+document.getElementById('ob-next').addEventListener('click',function(){
+  if(obCurrent<OB_TOTAL-1){obGoTo(obCurrent+1);}
+  else{launchApp();}
+});
+
+// Touch swipe onboarding
+let obTouchX=null;
+const obSlides=document.getElementById('ob-slides');
+obSlides.addEventListener('touchstart',e=>{obTouchX=e.touches[0].clientX;},{passive:true});
+obSlides.addEventListener('touchend',e=>{
+  if(obTouchX===null)return;
+  const dx=e.changedTouches[0].clientX-obTouchX;
+  if(Math.abs(dx)>50){if(dx<0&&obCurrent<OB_TOTAL-1)obGoTo(obCurrent+1);else if(dx>0&&obCurrent>0)obGoTo(obCurrent-1);}
+  obTouchX=null;
+},{passive:true});
+
+function launchApp(){
+  const ob=document.getElementById('onboarding');
+  ob.style.opacity='0';ob.style.transition='opacity .35s ease';
+  setTimeout(()=>{ob.style.display='none';},350);
+  document.getElementById('app').style.display='block';
+  initData();renderDashboard();updateNotifBadge();initPrayers();
+}
+
+// ══════════════════════════════════════════════════════
+// SPLASH: afficher pendant 15 secondes puis montrer onboarding
+// ══════════════════════════════════════════════════════
+window.addEventListener('load',function(){
+  setTimeout(function(){
+    const splash=document.getElementById('splash');
+    splash.classList.add('hide');
+    setTimeout(function(){
+      splash.style.display='none';
+      const ob=document.getElementById('onboarding');
+      ob.classList.add('visible');
+      ob.style.opacity='0';
+      ob.style.transition='opacity .4s ease';
+      setTimeout(()=>{ob.style.opacity='1';},30);
+    },600);
+  }, 15000); // ← 15 secondes
+});
+
+/* ══════════════════════════════════════════════════════
+   APP LOGIC
+   ══════════════════════════════════════════════════════ */
+const KEYS={membres:'sd_membres',transactions:'sd_transactions',evenements:'sd_evenements',annonces:'sd_annonces',coran:'sd_coran',notifs:'sd_notifs'};
+function load(k){try{return JSON.parse(localStorage.getItem(k)||'null')||[]}catch{return[]}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v))}
+
+function initData(){
+  if(!localStorage.getItem(KEYS.membres)){
+    save(KEYS.membres,[
+      {id:1,prenom:'Fatou',nom:'Amar',tel:'+221 77 123 45 67',email:'fatou@example.com',statut:'actif',commission:'Finances',cotis:15000,date:'2024-01-15',cotisOk:true},
+      {id:2,prenom:'Modou',nom:'Ndiaye',tel:'+221 78 234 56 78',email:'',statut:'actif',commission:'Organisation',cotis:15000,date:'2024-02-01',cotisOk:true},
+      {id:3,prenom:'Aminata',nom:'Sow',tel:'+221 76 345 67 89',email:'',statut:'actif',commission:'Sociale',cotis:15000,date:'2024-03-10',cotisOk:false},
+      {id:4,prenom:'Ibrahima',nom:'Mbaye',tel:'+221 77 456 78 90',email:'',statut:'actif',commission:'Sociale',cotis:15000,date:'2024-01-20',cotisOk:true},
+      {id:5,prenom:'Rokhaya',nom:'Diallo',tel:'+221 70 567 89 01',email:'',statut:'sympathisant',commission:'Culturelle',cotis:5000,date:'2024-04-05',cotisOk:true},
+    ]);
+  }
+  if(!localStorage.getItem(KEYS.transactions)){
+    const m=new Date().toISOString().slice(0,7);
+    save(KEYS.transactions,[
+      {id:1,type:'recette',desc:'Cotisations Mars',montant:485000,date:m+'-01',cat:'Cotisations',note:''},
+      {id:2,type:'depense',desc:'Location salle',montant:50000,date:m+'-03',cat:'Charges / Loyer',note:''},
+      {id:3,type:'recette',desc:'Don Serigne Ba',montant:100000,date:m+'-05',cat:'Dons / Zakat',note:''},
+      {id:4,type:'depense',desc:'Matériel sonorisation',montant:92500,date:m+'-08',cat:'Matériel',note:''},
+    ]);
+  }
+  if(!localStorage.getItem(KEYS.evenements)){
+    const d=new Date();
+    function fd(o){const x=new Date(d);x.setDate(d.getDate()+o);return x.toISOString().slice(0,10)}
+    save(KEYS.evenements,[
+      {id:1,titre:'Séance hebdomadaire',date:fd(2),heure:'20:00',lieu:'Siège du dahira',type:'Réunion',desc:'Séance ordinaire du vendredi avec récitation de khassidas.'},
+      {id:2,titre:'Lecture collective Coran',date:fd(4),heure:'09:00',lieu:'En ligne (WhatsApp)',type:'Spirituel',desc:'Lecture en commun du saint Coran.'},
+      {id:3,titre:'Collecte de fonds',date:fd(10),heure:'15:00',lieu:'Salle polyvalente',type:'Social',desc:'Grande collecte annuelle pour les activités du dahira.'},
+      {id:4,titre:'Assemblée Générale',date:fd(16),heure:'18:00',lieu:'Grande salle CUDIS',type:'Réunion',desc:'AG annuelle avec présentation du bilan financier.'},
+    ]);
+  }
+  if(!localStorage.getItem(KEYS.annonces)){
+    save(KEYS.annonces,[
+      {id:1,titre:'Bienvenue sur Sunu Dahira !',body:'Chers membres, la plateforme numérique du dahira est désormais en ligne.',auteur:'Moussa Amar',date:new Date().toISOString().slice(0,10),importance:'normale'},
+      {id:2,titre:'Rappel cotisations Mars',body:"Nous rappelons à tous les membres que les cotisations du mois de Mars sont dues avant le 15.",auteur:'Moussa Amar',date:new Date().toISOString().slice(0,10),importance:'urgente'},
+    ]);
+  }
+  if(!localStorage.getItem(KEYS.coran)){
+    const hizbs=Array.from({length:30},(_,i)=>({id:i+1,status:'free',user:''}));
+    hizbs[2].status='taken';hizbs[2].user='Fatou A.';
+    hizbs[5].status='taken';hizbs[5].user='Modou N.';
+    hizbs[8].status='done';hizbs[8].user='Ibrahima M.';
+    hizbs[11].status='done';hizbs[11].user='Rokhaya D.';
+    hizbs[14].status='taken';hizbs[14].user='Aminata S.';
+    save(KEYS.coran,hizbs);
+  }
+  if(!localStorage.getItem(KEYS.notifs)){
+    save(KEYS.notifs,[
+      {id:1,text:'Fatou Amar a payé sa cotisation',time:'Il y a 2h',read:false},
+      {id:2,text:'Nouvel événement : Assemblée Générale',time:'Il y a 5h',read:false},
+      {id:3,text:'Modou Ndiaye a rejoint le dahira',time:'Hier',read:false},
+      {id:4,text:'Rapport financier Mars disponible',time:'Il y a 2 jours',read:true},
+    ]);
+  }
+}
+
+let currentPage='dashboard',mFilter='tous',tFilter='tous',evFilter='tous';
+let selectedMembreId=null,selectedEvId=null;
+const pageTitles={dashboard:'Tableau de bord',membres:'Membres',finances:'Finances',cotisations:'Cotisations',evenements:'Événements',annonces:'Annonces',coran:'Lecture Coran',notifications:'Notifications'};
+
+function goPage(name,navEl){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  currentPage=name;
+  document.getElementById('tb-page').textContent=pageTitles[name]||name;
+  if(navEl){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));navEl.classList.add('active');}
+  closeSidebar();renderPage(name);
+}
+function renderPage(n){
+  if(n==='dashboard')renderDashboard();
+  else if(n==='membres')renderMembres();
+  else if(n==='finances')renderFinances();
+  else if(n==='cotisations')renderCotisations();
+  else if(n==='evenements')renderEvenements();
+  else if(n==='annonces')renderAnnonces();
+  else if(n==='coran')renderCoran();
+  else if(n==='notifications')renderNotifications();
+}
+function setBN(id){document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));const el=document.getElementById(id);if(el)el.classList.add('active');}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('show');document.body.style.overflow='hidden'}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');document.body.style.overflow=''}
+function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden';const today=new Date().toISOString().slice(0,10);['m-date','t-date','ev-date'].forEach(did=>{const el=document.getElementById(did);if(el&&!el.value)el.value=today})}
+function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
+function openDetail(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
+function closeDetail(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+
+const COLORS=['linear-gradient(135deg,#0A1E1E,#1A4848)','linear-gradient(135deg,#1A4848,#1A5060)','linear-gradient(135deg,#D4921A,#F0B429)','linear-gradient(135deg,#0F2828,#2A6878)','linear-gradient(135deg,#5B4FC4,#9080E0)','linear-gradient(135deg,#1A5060,#3A8898)'];
+function colorOf(id){return COLORS[id%COLORS.length]}
+function initials(m){return((m.prenom[0]||'')+(m.nom[0]||'')).toUpperCase()}
+function fmtNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return Math.round(n/1000)+'k';return n.toString()}
+function fmtDate(d){if(!d)return'—';const p=d.split('-');const M=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0]}
+function thisMonth(){return new Date().toISOString().slice(0,7)}
+function evTagClass(t){return t==='Spirituel'?'t-coran':t==='Social'?'t-soc':'t-reu'}
+function evIcon(t){return t==='Spirituel'?'<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>':t==='Social'?'<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>':'<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'}
+function nextId(arr){return arr.length?Math.max(...arr.map(x=>x.id))+1:1}
+
+function renderDashboard(){
+  const membres=load(KEYS.membres);
+  const transactions=load(KEYS.transactions);
+  const evenements=load(KEYS.evenements);
+  const actifs=membres.filter(m=>m.statut==='actif').length;
+  const rec=transactions.filter(t=>t.type==='recette').reduce((s,t)=>s+t.montant,0);
+  const dep=transactions.filter(t=>t.type==='depense').reduce((s,t)=>s+t.montant,0);
+  const solde=rec-dep;
+  const cotisOk=membres.filter(m=>m.cotisOk).length;
+  const cotisRate=membres.length?Math.round(cotisOk/membres.length*100):0;
+  document.getElementById('db-members').textContent=actifs;
+  document.getElementById('db-solde').textContent=fmtNum(Math.max(0,solde));
+  document.getElementById('db-cotis').textContent=cotisRate+'%';
+  const month=thisMonth();
+  const recMois=transactions.filter(t=>t.type==='recette'&&t.date.startsWith(month)).reduce((s,t)=>s+t.montant,0);
+  const depMois=transactions.filter(t=>t.type==='depense'&&t.date.startsWith(month)).reduce((s,t)=>s+t.montant,0);
+  document.getElementById('db-rec').textContent=fmtNum(recMois);
+  document.getElementById('db-dep').textContent=fmtNum(depMois);
+  document.getElementById('db-stats').innerHTML=`
+    <div class="stat-card sc-gold"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="sc-num">${membres.length}</div><div class="sc-lbl">Membres Totaux</div><div class="sc-trend t-up">↑ ${actifs} actifs</div></div>
+    <div class="stat-card sc-green"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div class="sc-num">${fmtNum(Math.max(0,solde))}</div><div class="sc-lbl">Solde FCFA</div><div class="sc-trend ${solde>=0?'t-up':'t-dn'}">${solde>=0?'↑':'↓'} en caisse</div></div>
+    <div class="stat-card sc-blue"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div><div class="sc-num">${evenements.length}</div><div class="sc-lbl">Événements</div><div class="sc-trend t-up">↑ planifiés</div></div>
+    <div class="stat-card sc-purple"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="sc-num">${cotisRate}%</div><div class="sc-lbl">Cotisations</div><div class="sc-trend ${cotisRate>=70?'t-up':'t-dn'}">${cotisOk}/${membres.length} ok</div></div>
+  `;
+  const last5=[...membres].slice(-5).reverse();
+  document.getElementById('db-membres-list').innerHTML=last5.length?last5.map(m=>memberRowHTML(m)).join(''):`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><p>Aucun membre</p></div>`;
+  const today=new Date().toISOString().slice(0,10);
+  const upcoming=evenements.filter(e=>e.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
+  document.getElementById('db-events-list').innerHTML=upcoming.length?upcoming.map(e=>eventRowHTML(e,'detail')).join(''):`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span><p>Aucun événement</p></div>`;
+  const commissions=['Finances','Organisation','Communication','Sociale','Culturelle'];
+  document.getElementById('db-progress').innerHTML=commissions.map(c=>{
+    const cm=membres.filter(m=>m.commission===c);const ok=cm.filter(m=>m.cotisOk).length;
+    const pct=cm.length?Math.round(ok/cm.length*100):0;
+    const color=pct<65?'background:linear-gradient(90deg,#DC2626,#f87171)':'';
+    return `<div class="prog-item"><div class="prog-head"><span class="pname">${c}</span><span class="pval">${pct}%</span></div><div class="prog-track"><div class="prog-fill" style="width:${pct}%;${color}"></div></div><div class="prog-sub">${ok} / ${cm.length} membres à jour</div></div>`;
+  }).join('');
+  const last6=transactions.slice(-6);
+  const maxVal=Math.max(...last6.map(t=>t.montant),1);
+  document.getElementById('db-bar-chart').innerHTML=`<div class="bars">${last6.map(t=>{
+    const h=Math.max(8,Math.round(t.montant/maxVal*68));
+    const color=t.type==='recette'?'linear-gradient(to top,var(--teal-mid),var(--teal-bright))':'linear-gradient(to top,#DC2626,#f87171)';
+    return `<div class="bar-col"><div class="bar-fill" style="height:${h}px;background:${color}"></div><div class="bar-lbl">${t.desc.slice(0,4)}</div></div>`;
+  }).join('')}</div>`;
+  renderDbEventsBlue();
+}
+
+function renderDbEventsBlue(){
+  const evenements=load(KEYS.evenements);
+  const today=new Date().toISOString().slice(0,10);
+  const upcoming=evenements.filter(e=>e.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
+  const M=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const container=document.getElementById('db-events-blue-list');
+  if(!container)return;
+  if(!upcoming.length){
+    container.innerHTML='<div style="padding:28px;text-align:center;color:rgba(255,255,255,.3);font-size:13px">Aucun événement à venir</div>';
+    return;
+  }
+  container.innerHTML=upcoming.map(e=>{
+    const d=e.date.split('-');
+    const tagCls=e.type==='Spirituel'?'t-coran':e.type==='Social'?'t-soc':'t-reu';
+    return `<div class="ev-blue-row" onclick="showEvenement(${e.id})">
+      <div class="ev-blue-date"><div class="ev-blue-day">${d[2]}</div><div class="ev-blue-mon">${M[parseInt(d[1])-1]||''}</div></div>
+      <div style="flex:1;min-width:0">
+        <div class="ev-blue-title">${e.titre}</div>
+        <div class="ev-blue-desc">${e.lieu}</div>
+        <div class="ev-blue-tag ${tagCls}">${e.type}</div>
+      </div>
+      <div class="ev-blue-heure">
+        <div class="ev-blue-heure-val">${e.heure}</div>
+        <div class="ev-blue-heure-lbl">heure</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function memberRowHTML(m,onclick='showMembre'){
+  const ini=initials(m),bg=colorOf(m.id);
+  const bc=m.cotisOk?'b-ok':'b-late',bt=m.cotisOk?'À jour':'Retard';
+  return `<div class="m-row" onclick="${onclick}(${m.id})">
+    <div class="m-av" style="background:${bg}">${ini}</div>
+    <div class="m-info"><div class="m-name">${m.prenom} ${m.nom}</div><div class="m-role">Commission ${m.commission}</div></div>
+    <div class="m-right"><div class="badge ${m.statut==='sympathisant'?'b-sym':bc}">${m.statut==='sympathisant'?'Sympath.':bt}</div><div class="m-amount">${fmtNum(m.cotis)} <small>FCFA</small></div></div>
+  </div>`;
+}
+
+function renderMembres(){
+  const membres=load(KEYS.membres);
+  let filtered=membres;
+  const q=(document.getElementById('search-membres')||{value:''}).value.toLowerCase();
+  if(q)filtered=filtered.filter(m=>(m.prenom+' '+m.nom+m.tel).toLowerCase().includes(q));
+  if(mFilter==='actif')filtered=filtered.filter(m=>m.statut==='actif');
+  else if(mFilter==='sympathisant')filtered=filtered.filter(m=>m.statut==='sympathisant');
+  else if(mFilter==='retard')filtered=filtered.filter(m=>!m.cotisOk);
+  document.getElementById('membres-count').textContent=`${filtered.length} membre${filtered.length>1?'s':''} enregistré${filtered.length>1?'s':''}`;
+  const container=document.getElementById('membres-list');
+  if(!filtered.length){container.innerHTML=`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><p>Aucun résultat</p></div>`;return}
+  container.innerHTML=`<div class="card">${filtered.map(m=>memberRowHTML(m)).join('')}</div>`;
+}
+function filterMembres(){renderMembres()}
+function setMFilter(f,el){mFilter=f;document.querySelectorAll('#ftabs-membres .ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderMembres();}
+
+function showMembre(id){
+  const m=load(KEYS.membres).find(x=>x.id===id);if(!m)return;
+  selectedMembreId=id;
+  document.getElementById('dm-av').style.background=colorOf(m.id);
+  document.getElementById('dm-av').textContent=initials(m);
+  document.getElementById('dm-name').textContent=m.prenom+' '+m.nom;
+  document.getElementById('dm-role').textContent=`Commission ${m.commission} · ${m.statut}`;
+  document.getElementById('dm-tel').textContent=m.tel||'—';
+  document.getElementById('dm-statut').textContent=m.statut;
+  document.getElementById('dm-commission').textContent=m.commission;
+  document.getElementById('dm-cotis').textContent=fmtNum(m.cotis)+' FCFA/mois';
+  document.getElementById('dm-date').textContent=fmtDate(m.date);
+  document.getElementById('dm-email').textContent=m.email||'—';
+  openDetail('detail-membre');
+}
+function markCotisOk(){const membres=load(KEYS.membres);const idx=membres.findIndex(m=>m.id===selectedMembreId);if(idx>=0){membres[idx].cotisOk=true;save(KEYS.membres,membres);}closeDetail('detail-membre');toast('Cotisation payée');renderPage(currentPage);}
+function deleteMembre(){if(!confirm('Supprimer ce membre ?'))return;save(KEYS.membres,load(KEYS.membres).filter(m=>m.id!==selectedMembreId));closeDetail('detail-membre');toast('Membre supprimé');renderPage(currentPage);}
+function saveMembre(){
+  const prenom=document.getElementById('m-prenom').value.trim(),nom=document.getElementById('m-nom').value.trim();
+  if(!prenom||!nom){toast('Prénom et nom requis');return}
+  const membres=load(KEYS.membres);
+  membres.push({id:nextId(membres),prenom,nom,tel:document.getElementById('m-tel').value.trim(),email:document.getElementById('m-email').value.trim(),statut:document.getElementById('m-statut').value,commission:document.getElementById('m-commission').value,cotis:parseInt(document.getElementById('m-cotis').value)||15000,date:document.getElementById('m-date').value||new Date().toISOString().slice(0,10),cotisOk:false});
+  save(KEYS.membres,membres);
+  const notifs=load(KEYS.notifs);notifs.unshift({id:nextId(notifs),text:`${prenom} ${nom} a rejoint le dahira`,time:"À l'instant",read:false});save(KEYS.notifs,notifs);updateNotifBadge();
+  closeModal('modal-membre');['m-prenom','m-nom','m-tel','m-email','m-date'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  toast(`${prenom} ${nom} ajouté(e)`);renderPage(currentPage);
+}
+
+function renderFinances(){
+  const transactions=load(KEYS.transactions);
+  const rec=transactions.filter(t=>t.type==='recette').reduce((s,t)=>s+t.montant,0);
+  const dep=transactions.filter(t=>t.type==='depense').reduce((s,t)=>s+t.montant,0);
+  document.getElementById('fin-stats').innerHTML=`
+    <div class="stat-card sc-green"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div class="sc-num">${fmtNum(rec)}</div><div class="sc-lbl">Total recettes</div></div>
+    <div class="stat-card sc-gold"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div><div class="sc-num">${fmtNum(dep)}</div><div class="sc-lbl">Total dépenses</div></div>
+    <div class="stat-card ${rec-dep>=0?'sc-green':'sc-purple'}"><div class="sc-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="sc-num">${fmtNum(Math.abs(rec-dep))}</div><div class="sc-lbl">Solde</div></div>
+  `;
+  let filtered=[...transactions].reverse();
+  if(tFilter!=='tous')filtered=filtered.filter(t=>t.type===tFilter);
+  const list=document.getElementById('transactions-list');
+  if(!filtered.length){list.innerHTML=`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><p>Aucune transaction</p></div>`;return}
+  list.innerHTML=filtered.map(t=>{
+    const isRec=t.type==='recette';
+    return `<div class="tr-row"><div class="tr-ico" style="background:${isRec?'rgba(22,163,74,.1)':'rgba(220,38,38,.1)'}"><span style="color:${isRec?'var(--green)':'var(--red)'}; display:flex">${isRec?'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>':'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>'}</span></div><div class="tr-info"><div class="tr-name">${t.desc}</div><div class="tr-date">${fmtDate(t.date)} · ${t.cat}</div></div><div class="tr-amount ${isRec?'tr-rec':'tr-dep'}">${isRec?'+':'-'}${fmtNum(t.montant)}</div></div>`;
+  }).join('');
+}
+function setTFilter(f,el){tFilter=f;document.querySelectorAll('#page-finances .ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderFinances();}
+function saveTransaction(){
+  const desc=document.getElementById('t-desc').value.trim(),montant=parseInt(document.getElementById('t-montant').value);
+  if(!desc||!montant){toast('Description et montant requis');return}
+  const transactions=load(KEYS.transactions);
+  transactions.push({id:nextId(transactions),type:document.getElementById('t-type').value,desc,montant,date:document.getElementById('t-date').value||new Date().toISOString().slice(0,10),cat:document.getElementById('t-cat').value,note:document.getElementById('t-note').value});
+  save(KEYS.transactions,transactions);closeModal('modal-transaction');['t-desc','t-montant','t-note'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});toast('Transaction enregistrée');renderPage(currentPage);
+}
+
+function renderCotisations(){
+  const membres=load(KEYS.membres),now=new Date();
+  const commissions=['Finances','Organisation','Communication','Sociale','Culturelle'];
+  document.getElementById('cotis-progress').innerHTML=commissions.map(c=>{
+    const cm=membres.filter(m=>m.commission===c),ok=cm.filter(m=>m.cotisOk).length;
+    const pct=cm.length?Math.round(ok/cm.length*100):0;
+    const color=pct<65?'background:linear-gradient(90deg,#DC2626,#f87171)':'';
+    return `<div class="prog-item"><div class="prog-head"><span class="pname">${c}</span><span class="pval">${pct}%</span></div><div class="prog-track"><div class="prog-fill" style="width:${pct}%;${color}"></div></div><div class="prog-sub">${ok} / ${cm.length} à jour ce mois</div></div>`;
+  }).join('');
+  const list=document.getElementById('cotis-membres');
+  if(!membres.length){list.innerHTML=`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span><p>Aucun membre</p></div>`;return;}
+  list.innerHTML=membres.map(m=>{
+    const cotis=loadCotis(m.id);let dots='';
+    for(let mo=0;mo<12;mo++){
+      const future=isFutureMonth(now.getFullYear(),mo);
+      const key=now.getFullYear()+'-'+String(mo+1).padStart(2,'0');
+      const paid=cotis[key]==='paid';
+      let cls='cmm-future';
+      if(!future)cls=paid?'cmm-paid':'cmm-due';
+      dots+=`<div class="cmm ${cls}">${MOIS_NAMES[mo][0]}</div>`;
+    }
+    return `<div class="member-cotis-row" onclick="openCotisDetail(${m.id})">
+      <div class="m-av" style="background:${colorOf(m.id)}">${initials(m)}</div>
+      <div class="m-info"><div class="m-name">${m.prenom} ${m.nom}</div><div style="font-size:11px;color:var(--text4)">${fmtNum(m.cotis)} FCFA/mois</div><div class="cotis-months-mini">${dots}</div></div>
+      <div class="m-right"><div class="badge ${m.cotisOk?'b-ok':'b-late'}">${m.cotisOk?'<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ce mois':'<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> Retard'}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function eventRowHTML(e,action='showEvenement'){
+  const d=e.date.split('-');const M=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  return `<div class="ev-row" onclick="${action}(${e.id})">
+    <div class="ev-date"><div class="ev-day">${d[2]}</div><div class="ev-mon">${M[parseInt(d[1])-1]||''}</div></div>
+    <div><div class="ev-title">${e.titre}</div><div class="ev-desc">${e.heure} · ${e.lieu}</div><div class="ev-tag ${evTagClass(e.type)}">${e.type}</div></div>
+  </div>`;
+}
+function renderEvenements(){
+  const ev=load(KEYS.evenements);let filtered=[...ev].sort((a,b)=>a.date.localeCompare(b.date));
+  if(evFilter!=='tous')filtered=filtered.filter(e=>e.type===evFilter);
+  const list=document.getElementById('events-list');
+  if(!filtered.length){list.innerHTML=`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span><p>Aucun événement</p></div>`;return}
+  list.innerHTML=`<div class="card">${filtered.map(e=>eventRowHTML(e)).join('')}</div>`;
+}
+function setEvFilter(f,el){evFilter=f;document.querySelectorAll('#page-evenements .ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderEvenements();}
+function showEvenement(id){
+  const ev=load(KEYS.evenements).find(e=>e.id===id);if(!ev)return;
+  selectedEvId=id;
+  document.getElementById('dev-icon').textContent=evIcon(ev.type);
+  document.getElementById('dev-title').textContent=ev.titre;
+  document.getElementById('dev-date').textContent=fmtDate(ev.date);
+  document.getElementById('dev-heure').textContent=ev.heure;
+  document.getElementById('dev-lieu').textContent=ev.lieu;
+  document.getElementById('dev-type').textContent=ev.type;
+  document.getElementById('dev-desc').textContent=ev.desc||'Aucune description.';
+  openDetail('detail-evenement');
+}
+function deleteEvenement(){if(!confirm('Supprimer cet événement ?'))return;save(KEYS.evenements,load(KEYS.evenements).filter(e=>e.id!==selectedEvId));closeDetail('detail-evenement');toast('Événement supprimé');renderPage(currentPage);}
+function saveEvenement(){
+  const titre=document.getElementById('ev-titre').value.trim(),date=document.getElementById('ev-date').value;
+  if(!titre||!date){toast('Titre et date requis');return}
+  const evenements=load(KEYS.evenements);
+  evenements.push({id:nextId(evenements),titre,date,heure:document.getElementById('ev-heure').value||'09:00',lieu:document.getElementById('ev-lieu').value.trim()||'À définir',type:document.getElementById('ev-type').value,desc:document.getElementById('ev-desc').value.trim()});
+  save(KEYS.evenements,evenements);
+  const notifs=load(KEYS.notifs);notifs.unshift({id:nextId(notifs),text:`Nouvel événement : ${titre}`,time:"À l'instant",read:false});save(KEYS.notifs,notifs);updateNotifBadge();
+  closeModal('modal-evenement');['ev-titre','ev-lieu','ev-desc'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});toast('Événement créé');renderPage(currentPage);
+}
+
+function renderAnnonces(){
+  const annonces=load(KEYS.annonces).reverse();
+  const list=document.getElementById('annonces-list');
+  if(!annonces.length){list.innerHTML=`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span><p>Aucune annonce</p></div>`;return}
+  list.innerHTML=annonces.map(a=>`
+    <div class="ann-item">
+      <div class="ann-top">
+        <div class="ann-av">${a.auteur.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
+        <div><div class="ann-author">${a.auteur}</div><div class="ann-date">${fmtDate(a.date)}</div></div>
+        ${a.importance==='urgente'?'<span style="margin-left:auto;font-size:11px;background:var(--red-bg);color:var(--red);padding:3px 8px;border-radius:20px;font-weight:600">Urgent</span>':''}
+      </div>
+      <div class="ann-title">${a.titre}</div>
+      <div class="ann-body">${a.body}</div>
+    </div>`).join('');
+}
+function saveAnnonce(){
+  const titre=document.getElementById('an-titre').value.trim(),body=document.getElementById('an-body').value.trim();
+  if(!titre||!body){toast('Titre et message requis');return}
+  const annonces=load(KEYS.annonces);
+  annonces.push({id:nextId(annonces),titre,body,auteur:'Moussa Amar',date:new Date().toISOString().slice(0,10),importance:document.getElementById('an-importance').value});
+  save(KEYS.annonces,annonces);const notifs=load(KEYS.notifs);notifs.unshift({id:nextId(notifs),text:`Nouvelle annonce : ${titre}`,time:"À l'instant",read:false});save(KEYS.notifs,notifs);updateNotifBadge();
+  closeModal('modal-annonce');['an-titre','an-body'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});toast('Annonce publiée');renderPage(currentPage);
+}
+
+function renderCoran(){
+  const hizbs=load(KEYS.coran);
+  const done=hizbs.filter(h=>h.status==='done').length;
+  const pct=Math.round(done/30*100);
+  document.getElementById('coran-prog').style.width=pct+'%';
+  document.getElementById('coran-stat').textContent=`${done} / 30 Parties complétées`;
+  document.getElementById('coran-pct').textContent=pct+'%';
+  document.getElementById('hizb-grid').innerHTML=hizbs.map(h=>{
+    let cls='hizb-free';
+    if(h.status==='mine')cls='hizb-mine';
+    else if(h.status==='done')cls='hizb-done';
+    else if(h.status==='taken')cls='hizb-taken';
+    return `<div class="hizb-cell ${cls}" onclick="selectHizb(${h.id})" title="${h.user||'Libre'}"><span class="juz-lbl">Juz'</span><span class="juz-num">${h.id}</span></div>`;
+  }).join('');
+}
+function selectHizb(id){
+  const hizbs=load(KEYS.coran),h=hizbs.find(x=>x.id===id);if(!h)return;
+  if(h.status==='taken'){toast('Déjà réservé par '+h.user);return}
+  if(h.status==='done'){toast('Déjà complété');return}
+  if(h.status==='mine'){h.status='done';h.user='Moi';save(KEYS.coran,hizbs);toast(`Juz' ${id} terminé ✓`);}
+  else{h.status='mine';h.user='Moi';save(KEYS.coran,hizbs);toast(`Juz' ${id} réservé`);}
+  renderCoran();
+}
+
+function renderNotifications(){
+  const notifs=load(KEYS.notifs);notifs.forEach(n=>n.read=true);save(KEYS.notifs,notifs);updateNotifBadge();
+  const list=document.getElementById('notif-list');
+  if(!notifs.length){list.innerHTML=`<div class="empty"><span class="ei"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><p>Aucune notification</p></div>`;return}
+  list.innerHTML=notifs.map(n=>`<div class="notif-item ${n.read?'':'unread'}"><div class="notif-dot ${n.read?'read':''}"></div><div><div class="notif-text">${n.text}</div><div class="notif-time">${n.time}</div></div></div>`).join('');
+}
+function updateNotifBadge(){const u=load(KEYS.notifs).filter(n=>!n.read).length;const b=document.getElementById('notif-count');if(b){b.textContent=u;b.style.display=u>0?'flex':'none';}}
+function openContextAdd(){const map={dashboard:'modal-membre',membres:'modal-membre',finances:'modal-transaction',evenements:'modal-evenement',annonces:'modal-annonce',cotisations:'modal-transaction'};openModal(map[currentPage]||'modal-membre');}
+
+const MOIS_NAMES=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+let cotisYear=new Date().getFullYear(),selectedCotisMembreId=null;
+function getCotisKey(id){return'sd_cotis_'+id}
+function loadCotis(id){try{return JSON.parse(localStorage.getItem(getCotisKey(id))||'{}')}catch{return{}}}
+function saveCotis(id,data){localStorage.setItem(getCotisKey(id),JSON.stringify(data))}
+function isFutureMonth(year,month){const now=new Date();return year>now.getFullYear()||(year===now.getFullYear()&&month>now.getMonth())}
+
+function openCotisDetail(membreId){
+  const m=load(KEYS.membres).find(x=>x.id===membreId);if(!m)return;
+  selectedCotisMembreId=membreId;cotisYear=new Date().getFullYear();
+  document.getElementById('cd-av').style.background=colorOf(m.id);
+  document.getElementById('cd-av').textContent=initials(m);
+  document.getElementById('cd-name').textContent=m.prenom+' '+m.nom;
+  document.getElementById('cd-sub').textContent=`Commission ${m.commission} · ${fmtNum(m.cotis)} FCFA/mois`;
+  renderCotisDetail(m);openDetail('detail-cotis');
+}
+function renderCotisDetail(m){
+  if(!m){m=load(KEYS.membres).find(x=>x.id===selectedCotisMembreId);if(!m)return;}
+  const cotis=loadCotis(m.id),now=new Date();
+  const joinYear=parseInt((m.date||'2024-01').split('-')[0]),joinMonth=parseInt((m.date||'2024-01').split('-')[1])-1;
+  document.getElementById('cd-year').textContent=cotisYear;
+  let totalPaid=0,totalDue=0;
+  for(let y=joinYear;y<=now.getFullYear();y++){
+    const startM=(y===joinYear?joinMonth:0),endM=(y===now.getFullYear()?now.getMonth():11);
+    for(let mo=startM;mo<=endM;mo++){const key=y+'-'+String(mo+1).padStart(2,'0');if(cotis[key]==='paid')totalPaid++;else totalDue++;}
+  }
+  document.getElementById('cd-paid').textContent=totalPaid;
+  document.getElementById('cd-due').textContent=totalDue;
+  document.getElementById('cd-total-m').textContent=fmtNum(totalDue*m.cotis);
+  let yearAmt=0;
+  for(let mo=0;mo<12;mo++){const key=cotisYear+'-'+String(mo+1).padStart(2,'0');if(cotis[key]==='paid')yearAmt+=m.cotis;}
+  document.getElementById('cd-year-total').textContent=fmtNum(yearAmt)+' FCFA';
+  let html='';
+  for(let mo=0;mo<12;mo++){
+    const key=cotisYear+'-'+String(mo+1).padStart(2,'0');
+    const future=isFutureMonth(cotisYear,mo);
+    const beforeJoin=cotisYear<joinYear||(cotisYear===joinYear&&mo<joinMonth);
+    const isPaid=cotis[key]==='paid';
+    let cls,icon,amtText;
+    if(beforeJoin||future){cls='cdm-future';icon='';amtText=beforeJoin?'N/A':'À venir';}
+    else if(isPaid){cls='cdm-paid';icon='ok';amtText=fmtNum(m.cotis)+' FCFA';}
+    else{cls='cdm-due';icon='!';amtText=fmtNum(m.cotis)+' FCFA';}
+    const clickable=(future||beforeJoin)?'style="cursor:default;opacity:.5"':'onclick="toggleMonth('+mo+')"';
+    html+=`<div class="cd-month-cell ${cls}" ${clickable}>${icon?`<span class="cdm-check">${icon}</span>`:''}<span class="cdm-name">${MOIS_NAMES[mo]}</span><span class="cdm-amount" style="color:${isPaid?'var(--green)':(!future&&!beforeJoin?'var(--red)':'var(--text4)')}">${amtText}</span></div>`;
+  }
+  document.getElementById('cd-months-grid').innerHTML=html;
+  const thisKey=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const membres=load(KEYS.membres);const idx=membres.findIndex(x=>x.id===m.id);
+  if(idx>=0){membres[idx].cotisOk=(cotis[thisKey]==='paid');save(KEYS.membres,membres);}
+}
+function toggleMonth(mo){
+  const m=load(KEYS.membres).find(x=>x.id===selectedCotisMembreId);if(!m)return;
+  const cotis=loadCotis(m.id),key=cotisYear+'-'+String(mo+1).padStart(2,'0');
+  if(cotis[key]==='paid'){delete cotis[key];toast(MOIS_NAMES[mo]+' non payé');}
+  else{
+    cotis[key]='paid';
+    const transactions=load(KEYS.transactions);
+    transactions.push({id:nextId(transactions),type:'recette',desc:`Cotisation ${m.prenom} ${m.nom} – ${MOIS_NAMES[mo]} ${cotisYear}`,montant:m.cotis,date:cotisYear+'-'+String(mo+1).padStart(2,'0')+'-01',cat:'Cotisations',note:''});
+    save(KEYS.transactions,transactions);toast(MOIS_NAMES[mo]+' payé — '+fmtNum(m.cotis)+' FCFA');
+  }
+  saveCotis(m.id,cotis);renderCotisDetail(m);
+  if(currentPage==='dashboard')renderDashboard();
+  if(currentPage==='cotisations')renderCotisations();
+}
+function changeCotisYear(delta){cotisYear+=delta;renderCotisDetail(null);}
+function payAllDue(){
+  const m=load(KEYS.membres).find(x=>x.id===selectedCotisMembreId);if(!m)return;
+  const cotis=loadCotis(m.id),now=new Date(),joinDate=new Date(m.date||'2024-01-01');
+  let count=0;const transactions=load(KEYS.transactions);
+  for(let mo=0;mo<12;mo++){
+    if(isFutureMonth(cotisYear,mo))continue;
+    const d=new Date(cotisYear,mo,1);
+    if(d<new Date(joinDate.getFullYear(),joinDate.getMonth(),1))continue;
+    const key=cotisYear+'-'+String(mo+1).padStart(2,'0');
+    if(cotis[key]!=='paid'){cotis[key]='paid';transactions.push({id:nextId(transactions),type:'recette',desc:`Cotisation ${m.prenom} ${m.nom} – ${MOIS_NAMES[mo]} ${cotisYear}`,montant:m.cotis,date:key+'-01',cat:'Cotisations',note:''});count++;}
+  }
+  save(KEYS.transactions,transactions);saveCotis(m.id,cotis);
+  toast(`${count} mois réglés — ${fmtNum(count*m.cotis)} FCFA`);
+  renderCotisDetail(m);
+  if(currentPage==='dashboard')renderDashboard();
+  if(currentPage==='cotisations')renderCotisations();
+}
+
+document.querySelectorAll('.modal-bg').forEach(bg=>{bg.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show')});});
+document.querySelectorAll('.detail-modal').forEach(bg=>{bg.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show')});});
+
+/* ══════════════════════════════════════════════════════
+   HEURES DE PRIÈRES — Dakar, Sénégal (calcul local)
+   ══════════════════════════════════════════════════════ */
+
+// Prières fixes approximatives pour Dakar (varient selon saison)
+// On calcule dynamiquement selon le jour de l'année pour une approximation réaliste
+function getPrayerTimes(){
+  const now = new Date();
+  const doy = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+  // Décalage saisonnier simplifié pour Dakar (latitude ~14.7°N)
+  const offset = Math.sin((doy - 80) * Math.PI / 180) * 45; // ±45 min variation
+  const base = {
+    fajr:    { h: 5,  m: 30 + Math.round(offset * 0.6) },
+    dhuhr:   { h: 13, m: 15 + Math.round(offset * 0.1) },
+    asr:     { h: 16, m: 30 + Math.round(offset * 0.3) },
+    maghrib: { h: 19, m: 20 + Math.round(offset * 0.5) },
+    isha:    { h: 20, m: 30 + Math.round(offset * 0.4) },
+  };
+  // Normalisation des minutes
+  for(const k in base){
+    while(base[k].m >= 60){ base[k].h++; base[k].m -= 60; }
+    while(base[k].m < 0){ base[k].h--; base[k].m += 60; }
+  }
+  return base;
+}
+
+function fmtPrayerTime(h, m){
+  return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+}
+
+function toMins(h, m){ return h * 60 + m; }
+
+const PRAYERS = [
+  { key:'fajr',    name:'Fajr',    ar:'الفجر',
+    icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>' },
+  { key:'dhuhr',   name:'Dhuhr',   ar:'الظهر',
+    icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>' },
+  { key:'asr',     name:'Asr',     ar:'العصر',
+    icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><path d="M12 6v1M12 17v1M6 12H5M19 12h-1" stroke-width="2.5"/></svg>' },
+  { key:'maghrib', name:'Maghrib', ar:'المغرب',
+    icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10V2"/><path d="M4.93 10.93A7 7 0 1 0 19.07 10.93"/><line x1="2" y1="17" x2="22" y2="17"/><line x1="2" y1="21" x2="22" y2="21"/></svg>' },
+  { key:'isha',    name:'Isha',    ar:'العشاء',
+    icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/><path d="M19 3v4M21 5h-4"/></svg>' },
+];
+
+function getHijriDate(){
+  // Approximation Hijri (formule simplifiée)
+  const jd = Math.floor((new Date().getTime() / 86400000) + 2440587.5);
+  const l = jd - 1948440 + 10632;
+  const n = Math.floor((l - 1) / 10631);
+  const ll = l - 10631 * n + 354;
+  const j = Math.floor((10985 - ll) / 5316) * Math.floor((50 * ll) / 17719) +
+            Math.floor(ll / 5670) * Math.floor((43 * ll) / 15238);
+  const ll2 = ll - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) -
+              Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
+  const month = Math.floor((24 * ll2) / 709);
+  const day = ll2 - Math.floor((709 * month) / 24);
+  const year = 30 * n + j - 30;
+  const MONTHS_AR = ['Muharram','Safar','Rabi I','Rabi II','Jumada I','Jumada II','Rajab','Shaban','Ramadan','Shawwal','Dhul-Qada','Dhul-Hijja'];
+  return `${day} ${MONTHS_AR[month-1] || ''} ${year} H`;
+}
+
+function renderPrayerCard(){
+  const times = getPrayerTimes();
+  const now = new Date();
+  const nowMins = toMins(now.getHours(), now.getMinutes());
+
+  // Hijri date
+  const hijriEl = document.getElementById('prayer-hijri');
+  if(hijriEl) hijriEl.textContent = getHijriDate();
+
+  // Trouver la prochaine prière
+  let nextIdx = -1;
+  for(let i = 0; i < PRAYERS.length; i++){
+    const p = PRAYERS[i];
+    const t = times[p.key];
+    if(toMins(t.h, t.m) > nowMins){ nextIdx = i; break; }
+  }
+  if(nextIdx === -1) nextIdx = 0; // lendemain → Fajr
+
+  const nextP = PRAYERS[nextIdx];
+  const nextT = times[nextP.key];
+  const nextMins = toMins(nextT.h, nextT.m);
+  let diffMins = nextMins - nowMins;
+  if(diffMins < 0) diffMins += 1440;
+  const diffH = Math.floor(diffMins / 60);
+  const diffM = diffMins % 60;
+
+  const nameEl = document.getElementById('next-prayer-name');
+  const timeEl = document.getElementById('next-prayer-time');
+  const cdEl   = document.getElementById('prayer-countdown');
+  if(nameEl) nameEl.textContent = nextP.name;
+  if(timeEl) timeEl.textContent = fmtPrayerTime(nextT.h, nextT.m);
+  if(cdEl)   cdEl.textContent = diffH > 0 ? `dans ${diffH}h ${diffM}min` : `dans ${diffM} min`;
+
+  // Grille des 5 prières
+  const grid = document.getElementById('prayer-grid');
+  if(!grid) return;
+  grid.innerHTML = PRAYERS.map((p, i) => {
+    const t = times[p.key];
+    const pMins = toMins(t.h, t.m);
+    const isCurrent = (i === nextIdx);
+    const isPassed = (pMins < nowMins && i !== nextIdx);
+    let cls = 'prayer-item';
+    if(isCurrent) cls += ' current';
+    if(isPassed) cls += ' passed';
+    return `<div class="${cls}"><div class="prayer-icon">${p.icon}</div><div class="prayer-name">${p.name}</div><div class="prayer-time">${fmtPrayerTime(t.h, t.m)}</div></div>`;
+  }).join('');
+}
+
+// Lancer le rendu des prières
+function initPrayers(){
+  renderPrayerCard();
+  // Mise à jour chaque minute
+  setInterval(renderPrayerCard, 60000);
+}
+
+</script>
+</body>
+</html>
